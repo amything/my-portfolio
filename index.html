@@ -245,7 +245,7 @@
   .case-link .arrow{ transition:transform 0.25s ease; }
   .case-link:hover .arrow{ transform:translateX(4px); }
 
-  /* ---------- Testimonials (glass) ---------- */
+  /* ---------- Testimonials (glass, 3-card) ---------- */
   .testimonials{
     position:relative;
     background:linear-gradient(180deg, #F6F6F4 0%, #FBFBFA 100%);
@@ -275,13 +275,14 @@
     opacity:0.22;
     bottom:-120px; right:8%;
   }
+  .testi-row{
+    position:relative; z-index:1;
+    max-width:1140px; margin:0 auto;
+    display:flex; align-items:center; justify-content:center;
+    gap:1.6rem;
+  }
   .testi-card-shell{
-    position:relative;
-    z-index:1;
-    max-width:640px;
-    margin:0 auto;
-    padding:3.6rem 3.2rem;
-    border-radius:28px;
+    border-radius:26px;
     background:rgba(255,255,255,0.45);
     backdrop-filter:blur(28px) saturate(180%);
     -webkit-backdrop-filter:blur(28px) saturate(180%);
@@ -289,38 +290,56 @@
     box-shadow:
       0 1px 1px rgba(255,255,255,0.6) inset,
       0 24px 60px -20px rgba(29,29,29,0.14);
+    transition:filter 0.6s ease, opacity 0.6s ease, transform 0.6s ease, flex-basis 0.6s ease;
   }
-  .testi-track{
+  .testi-card-shell.active{
     position:relative;
-    min-height:180px;
-    text-align:center;
+    flex:0 0 42%;
+    max-width:560px;
+    padding:3.4rem 3rem;
+    filter:blur(0);
+    opacity:1;
+    transform:scale(1);
+    z-index:2;
   }
-  .testi-slide{
-    position:absolute; inset:0;
-    opacity:0; visibility:hidden;
-    transition:opacity 0.9s ease, visibility 0.9s;
+  .testi-card-shell.side{
+    flex:0 0 24%;
+    max-width:250px;
+    padding:2rem 1.6rem;
+    filter:blur(3px);
+    opacity:0.5;
+    transform:scale(0.88);
+    cursor:pointer;
   }
-  .testi-slide.active{
-    position:relative;
-    opacity:1; visibility:visible;
+  .testi-card-shell.side:hover{ filter:blur(1.5px); opacity:0.75; }
+  .testi-card-shell.side .testi-quote-mark{ font-size:1.5rem; margin-bottom:0.3rem; }
+  .testi-card-shell.side .testi-quote{
+    font-size:0.85rem; line-height:1.55;
+    display:-webkit-box; -webkit-line-clamp:4; -webkit-box-orient:vertical; overflow:hidden;
   }
+  .testi-card-shell.side .testi-meta{ margin-top:1.2rem; }
+  .testi-card-shell.side .testi-avatar{ width:30px; height:30px; font-size:8px; margin-bottom:0.5rem; }
+  .testi-card-shell.side .testi-name{ font-size:11px; }
+  .testi-card-shell.side .testi-role{ font-size:8.5px; }
+
   .testi-quote-mark{
     display:block;
     font-family:Georgia, 'Times New Roman', serif;
-    font-size:2.2rem;
     line-height:1;
     color:var(--coral);
     opacity:0.55;
     font-weight:400;
+    font-size:2.2rem;
     margin-bottom:0.6rem;
   }
   .testi-quote{
     font-family:var(--font-body);
     font-weight:400;
-    font-size:clamp(1.15rem, 1.8vw, 1.4rem);
+    font-size:clamp(1.1rem, 1.7vw, 1.32rem);
     line-height:1.65;
     letter-spacing:0.002em;
     color:var(--heading);
+    text-align:center;
   }
   .testi-meta{
     margin-top:2rem;
@@ -336,11 +355,12 @@
     box-shadow:0 4px 10px rgba(29,29,29,0.06);
     margin-bottom:0.8rem;
   }
-  .testi-name{ font-size:var(--p3); font-weight:600; color:var(--heading); letter-spacing:0.01em; }
+  .testi-name{ font-size:var(--p3); font-weight:600; color:var(--heading); letter-spacing:0.01em; text-align:center; }
   .testi-role{
     font-size:10px; font-weight:500; color:var(--text-faint);
     text-transform:uppercase; letter-spacing:0.09em;
     margin-top:0.3rem;
+    text-align:center;
   }
 
   .testi-dots{ position:relative; z-index:1; display:flex; justify-content:center; gap:0.5rem; margin-top:2.8rem; }
@@ -389,7 +409,8 @@
     .clients{ padding:2.5rem 6vw 3.5rem; gap:2rem 2.5rem; }
     .clients img{ height:90px; width:90px; }
     .testimonials{ padding:4.5rem 6vw; }
-    .testi-card-shell{ padding:2.4rem 1.8rem; border-radius:22px; }
+    .testi-card-shell.side{ display:none; }
+    .testi-card-shell.active{ flex:1 1 100%; max-width:none; padding:2.4rem 1.8rem; border-radius:22px; }
     footer{ align-items:flex-start; }
     footer .contact-links{ align-items:flex-start; }
   }
@@ -582,36 +603,34 @@
 </main>
 
 <section class="testimonials">
-  <div class="testi-card-shell">
-    <div class="testi-track">
-      <div class="testi-slide active" data-index="0">
-        <span class="testi-quote-mark">&#8220;</span>
-        <p class="testi-quote">Amruta is one of the most talented designers I've had in my team at Dentsu. She has a strong design sense and clarity of thought when it comes to shaping strategy.</p>
-        <div class="testi-meta">
-          <div class="testi-avatar">PS</div>
-          <div class="testi-name">Praveen Sekar</div>
-          <div class="testi-role">Group Creative Director, Dentsu</div>
-        </div>
+  <div class="testi-row">
+    <div class="testi-card-shell side" id="testiCardPrev">
+      <span class="testi-quote-mark">&#8220;</span>
+      <p class="testi-quote"></p>
+      <div class="testi-meta">
+        <div class="testi-avatar"></div>
+        <div class="testi-name"></div>
+        <div class="testi-role"></div>
       </div>
+    </div>
 
-      <div class="testi-slide" data-index="1">
-        <span class="testi-quote-mark">&#8220;</span>
-        <p class="testi-quote">I had the privilege of collaborating with Amruta on the Immismart website, and her creativity and attention to detail are truly exceptional.</p>
-        <div class="testi-meta">
-          <div class="testi-avatar">JS</div>
-          <div class="testi-name">Jaffar Syed</div>
-          <div class="testi-role">Head of Digital Marketing, Immi Smart</div>
-        </div>
+    <div class="testi-card-shell active" id="testiCardActive">
+      <span class="testi-quote-mark">&#8220;</span>
+      <p class="testi-quote"></p>
+      <div class="testi-meta">
+        <div class="testi-avatar"></div>
+        <div class="testi-name"></div>
+        <div class="testi-role"></div>
       </div>
+    </div>
 
-      <div class="testi-slide" data-index="2">
-        <span class="testi-quote-mark">&#8220;</span>
-        <p class="testi-quote">Amruta delivered an exceptional body of work that meaningfully elevated our brand — highly communicative, reliable, and unwavering in delivering on time.</p>
-        <div class="testi-meta">
-          <div class="testi-avatar">G</div>
-          <div class="testi-name">Garry</div>
-          <div class="testi-role">Founder, Mother Cow Dairy</div>
-        </div>
+    <div class="testi-card-shell side" id="testiCardNext">
+      <span class="testi-quote-mark">&#8220;</span>
+      <p class="testi-quote"></p>
+      <div class="testi-meta">
+        <div class="testi-avatar"></div>
+        <div class="testi-name"></div>
+        <div class="testi-role"></div>
       </div>
     </div>
   </div>
@@ -690,16 +709,47 @@
     });
   });
 
-  /* ---------- Testimonials carousel (lean crossfade) ---------- */
-  const testiSlides = Array.from(document.querySelectorAll('.testi-slide'));
+  /* ---------- Testimonials carousel (glass 3-card) ---------- */
+  const testiData = [
+    {
+      quote:"Amruta is one of the most talented designers I've had in my team at Dentsu. She has a strong design sense and clarity of thought when it comes to shaping strategy.",
+      name:'Praveen Sekar', role:'Group Creative Director, Dentsu', initials:'PS'
+    },
+    {
+      quote:"I had the privilege of collaborating with Amruta on the Immismart website, and her creativity and attention to detail are truly exceptional.",
+      name:'Jaffar Syed', role:'Head of Digital Marketing, Immi Smart', initials:'JS'
+    },
+    {
+      quote:"Amruta delivered an exceptional body of work that meaningfully elevated our brand — highly communicative, reliable, and unwavering in delivering on time.",
+      name:'Garry', role:'Founder, Mother Cow Dairy', initials:'G'
+    }
+  ];
+
   const testiDots = Array.from(document.querySelectorAll('.testi-dot'));
+  const cardPrev = document.getElementById('testiCardPrev');
+  const cardActive = document.getElementById('testiCardActive');
+  const cardNext = document.getElementById('testiCardNext');
   let testiIndex = 0;
   let testiTimer;
 
-  function goToTesti(i){
-    testiIndex = (i + testiSlides.length) % testiSlides.length;
-    testiSlides.forEach((s, idx) => s.classList.toggle('active', idx === testiIndex));
+  function fillCard(el, item){
+    el.querySelector('.testi-quote').textContent = item.quote;
+    el.querySelector('.testi-avatar').textContent = item.initials;
+    el.querySelector('.testi-name').textContent = item.name;
+    el.querySelector('.testi-role').textContent = item.role;
+  }
+
+  function renderTesti(){
+    const len = testiData.length;
+    fillCard(cardPrev, testiData[(testiIndex - 1 + len) % len]);
+    fillCard(cardActive, testiData[testiIndex]);
+    fillCard(cardNext, testiData[(testiIndex + 1) % len]);
     testiDots.forEach((d, idx) => d.classList.toggle('active', idx === testiIndex));
+  }
+
+  function goToTesti(i){
+    testiIndex = (i + testiData.length) % testiData.length;
+    renderTesti();
   }
 
   function startTestiTimer(){
@@ -707,10 +757,13 @@
     testiTimer = setInterval(() => goToTesti(testiIndex + 1), 6000);
   }
 
-  if(testiSlides.length){
+  if(cardActive){
+    renderTesti();
     testiDots.forEach(dot => {
       dot.addEventListener('click', () => { goToTesti(Number(dot.dataset.index)); startTestiTimer(); });
     });
+    cardPrev.addEventListener('click', () => { goToTesti(testiIndex - 1); startTestiTimer(); });
+    cardNext.addEventListener('click', () => { goToTesti(testiIndex + 1); startTestiTimer(); });
     startTestiTimer();
   }
 

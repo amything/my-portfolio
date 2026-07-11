@@ -123,14 +123,15 @@
     gap:3.2rem 4rem;
     border-bottom:1px solid var(--line);
   }
-  .clients span{
-    font-family:var(--font-heading);
-    font-weight:600;
-    font-size:var(--h5);
-    color:var(--body-text);
-    letter-spacing:-0.01em;
-    opacity:0.75;
+  .clients img{
+    height:28px;
+    width:auto;
+    object-fit:contain;
+    opacity:0.6;
+    filter:grayscale(100%);
+    transition:opacity 0.25s ease, filter 0.25s ease;
   }
+  .clients img:hover{ opacity:1; filter:grayscale(0%); }
 
   /* ---------- Main layout (timeline) ---------- */
   main{
@@ -285,12 +286,12 @@
 </section>
 
 <div class="clients">
-  <span>Client One</span>
-  <span>Client Two</span>
-  <span>Client Three</span>
-  <span>Client Four</span>
-  <span>Client Five</span>
-  <span>Client Six</span>
+  <img src="clients/Emma-Sleep.png" alt="Emma Sleep">
+  <img src="clients/amazon.png" alt="Amazon">
+  <img src="clients/AstraZenca.png" alt="AstraZeneca">
+  <img src="clients/jbl.png" alt="JBL">
+  <img src="clients/Harman-Kardon-logo.png" alt="Harman Kardon">
+  <img src="clients/Safari.png" alt="Safari">
 </div>
 
 <main>
@@ -298,11 +299,12 @@
     <div class="ruler-track">
       <div class="ruler-line"></div>
       <div class="ruler-fill" id="rulerFill"></div>
+      <div class="ruler-item" data-year="2026"><span class="ruler-dot"></span><span class="ruler-year">2026</span></div>
       <div class="ruler-item" data-year="2024"><span class="ruler-dot"></span><span class="ruler-year">2024</span></div>
       <div class="ruler-item" data-year="2023"><span class="ruler-dot"></span><span class="ruler-year">2023</span></div>
-      <div class="ruler-item" data-year="2022"><span class="ruler-dot"></span><span class="ruler-year">2022</span></div>
       <div class="ruler-item" data-year="2021"><span class="ruler-dot"></span><span class="ruler-year">2021</span></div>
       <div class="ruler-item" data-year="2020"><span class="ruler-dot"></span><span class="ruler-year">2020</span></div>
+      <div class="ruler-item" data-year="2018"><span class="ruler-dot"></span><span class="ruler-year">2018</span></div>
     </div>
   </nav>
 
@@ -312,6 +314,26 @@
       <h2>Selected work</h2>
       <p>A run through recent projects, year by year — swap these placeholders for your own case studies.</p>
     </section>
+
+    <article class="project" id="p2026" data-year="2026">
+      <div class="project-visual">
+        <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+          <rect width="400" height="300" fill="#F1F0EE"/>
+          <circle cx="200" cy="150" r="80" fill="none" stroke="#FF5C4D" stroke-width="1.5" opacity="0.6"/>
+          <circle cx="200" cy="150" r="45" fill="none" stroke="#FF5C4D" stroke-width="1.5" opacity="0.9"/>
+          <circle cx="200" cy="150" r="6" fill="#FF5C4D"/>
+        </svg>
+      </div>
+      <div class="project-info">
+        <div class="tag-row"><span class="tag">Project title</span><span class="project-year">2026</span></div>
+        <h3>Mantra108</h3>
+        <p class="desc">Short one or two line description of the project, the problem it solved, and your role in it.</p>
+        <div class="skill-chips">
+          <span class="chip">Skill</span><span class="chip">Skill</span><span class="chip">Skill</span>
+        </div>
+        <a class="case-link" href="#">View case study <span class="arrow">→</span></a>
+      </div>
+    </article>
 
     <article class="project" id="p2024" data-year="2024">
       <div class="project-visual">
@@ -327,7 +349,7 @@
       </div>
       <div class="project-info">
         <div class="tag-row"><span class="tag">Project title</span><span class="project-year">2024</span></div>
-        <h3>Project Name One</h3>
+        <h3>PSP Dashboard</h3>
         <p class="desc">Short one or two line description of the project, the problem it solved, and your role in it.</p>
         <div class="skill-chips">
           <span class="chip">Skill</span><span class="chip">Skill</span><span class="chip">Skill</span>
@@ -349,28 +371,7 @@
       </div>
       <div class="project-info">
         <div class="tag-row"><span class="tag">Project title</span><span class="project-year">2023</span></div>
-        <h3>Project Name Two</h3>
-        <p class="desc">Short one or two line description of the project, the problem it solved, and your role in it.</p>
-        <div class="skill-chips">
-          <span class="chip">Skill</span><span class="chip">Skill</span><span class="chip">Skill</span>
-        </div>
-        <a class="case-link" href="#">View case study <span class="arrow">→</span></a>
-      </div>
-    </article>
-
-    <article class="project" id="p2022" data-year="2022">
-      <div class="project-visual">
-        <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
-          <rect width="400" height="300" fill="#F1F0EE"/>
-          <rect x="50" y="50" width="90" height="90" rx="8" fill="#fff" stroke="#FF5C4D"/>
-          <rect x="160" y="50" width="90" height="90" rx="8" fill="#fff" stroke="#FF5C4D" opacity="0.7"/>
-          <rect x="270" y="50" width="80" height="90" rx="8" fill="#fff" stroke="#FF5C4D" opacity="0.4"/>
-          <rect x="50" y="160" width="300" height="16" rx="4" fill="#fff" stroke="#FF5C4D" opacity="0.5"/>
-        </svg>
-      </div>
-      <div class="project-info">
-        <div class="tag-row"><span class="tag">Project title</span><span class="project-year">2022</span></div>
-        <h3>Project Name Three</h3>
+        <h3>ImmiSmart</h3>
         <p class="desc">Short one or two line description of the project, the problem it solved, and your role in it.</p>
         <div class="skill-chips">
           <span class="chip">Skill</span><span class="chip">Skill</span><span class="chip">Skill</span>
@@ -391,7 +392,7 @@
       </div>
       <div class="project-info">
         <div class="tag-row"><span class="tag">Project title</span><span class="project-year">2021</span></div>
-        <h3>Project Name Four</h3>
+        <h3>Syneoes Health</h3>
         <p class="desc">Short one or two line description of the project, the problem it solved, and your role in it.</p>
         <div class="skill-chips">
           <span class="chip">Skill</span><span class="chip">Skill</span><span class="chip">Skill</span>
@@ -411,7 +412,28 @@
       </div>
       <div class="project-info">
         <div class="tag-row"><span class="tag">Project title</span><span class="project-year">2020</span></div>
-        <h3>Project Name Five</h3>
+        <h3>JBL &amp; Harman-Kardon</h3>
+        <p class="desc">Short one or two line description of the project, the problem it solved, and your role in it.</p>
+        <div class="skill-chips">
+          <span class="chip">Skill</span><span class="chip">Skill</span><span class="chip">Skill</span>
+        </div>
+        <a class="case-link" href="#">View case study <span class="arrow">→</span></a>
+      </div>
+    </article>
+
+    <article class="project" id="p2018" data-year="2018">
+      <div class="project-visual">
+        <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+          <rect width="400" height="300" fill="#F1F0EE"/>
+          <rect x="50" y="50" width="90" height="90" rx="8" fill="#fff" stroke="#FF5C4D"/>
+          <rect x="160" y="50" width="90" height="90" rx="8" fill="#fff" stroke="#FF5C4D" opacity="0.7"/>
+          <rect x="270" y="50" width="80" height="90" rx="8" fill="#fff" stroke="#FF5C4D" opacity="0.4"/>
+          <rect x="50" y="160" width="300" height="16" rx="4" fill="#fff" stroke="#FF5C4D" opacity="0.5"/>
+        </svg>
+      </div>
+      <div class="project-info">
+        <div class="tag-row"><span class="tag">Project title</span><span class="project-year">2018</span></div>
+        <h3>Sterling Holidays</h3>
         <p class="desc">Short one or two line description of the project, the problem it solved, and your role in it.</p>
         <div class="skill-chips">
           <span class="chip">Skill</span><span class="chip">Skill</span><span class="chip">Skill</span>
@@ -424,9 +446,9 @@
 </main>
 
 <footer id="contact">
-  <h2>Let's make something worth scrolling for.</h2>
+  <h2>From concept to creation,<br>let's make it happen</h2>
   <div class="contact-links">
-    <a href="mailto:hello@amrutajadhav.design">hello@amrutajadhav.design</a>
+    <a href="mailto:amruta.inbox@gmail.com">amruta.inbox@gmail.com</a>
     <a href="#">Instagram</a>
     <a href="#">LinkedIn</a>
   </div>

@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Found in Nature</title>
+<style>
+@font-face{
+  font-family:'Bricolage';
+  src:url('BricolageGrotesque-Regular.otf') format('opentype');
+  font-weight:400;
+  font-style:normal;
+}
+@font-face{
+  font-family:'Bricolage';
+  src:url('BricolageGrotesque48pt-Medium.otf') format('opentype');
+  font-weight:500;
+  font-style:normal;
+}
+@font-face{
+  font-family:'Bricolage';
+  src:url('BricolageGrotesque48pt-Bold.otf') format('opentype');
+  font-weight:700;
+  font-style:normal;
+}
+
+*{box-sizing:border-box;margin:0;padding:0;}
+
+:root{
+  --bg:#faf7f2;
+  --surface:#ffffff;
+  --border:rgba(0,0,0,0.08);
+  --border2:rgba(0,0,0,0.13);
+  --text:#28241e;
+  --text2:#8a8377;
+  --text3:#b5ada0;
+  --radius:14px;
+}
+
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:'Bricolage',system-ui,sans-serif;font-weight:400;font-size:14px;line-height:1.5;min-height:100vh;}
+
+nav{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:2rem 3rem 0.6rem;
+}
+
+.nav-title{
+  font-family:'Bricolage',sans-serif;
+  font-weight:700;
+  font-style:normal;
+  font-size:clamp(30px,4.5vw,44px);
+  letter-spacing:-0.02em;
+  color:var(--text);
+  line-height:1.05;
+  margin-bottom:6px;
+}
+.nav-title span{color:#c47a54;}
+
+.meta-bar{
+  padding:0 3rem 1.75rem;
+  display:flex;align-items:center;gap:1rem;
+  font-family:'Bricolage';
+  font-weight:500;
+  font-size:14px;color:#6b6459;
+  border-bottom:1px solid var(--border);flex-wrap:wrap;
+  margin-top:-4px;
+}
+.meta-sep{opacity:0.6;}
+
+.archive{padding:0 3rem 6rem;}
+
+.month-section{padding:3rem 0 1rem;border-bottom:1px solid var(--border);}
+.month-section:last-child{border-bottom:none;}
+
+.month-header{
+  display:flex;align-items:flex-start;justify-content:space-between;
+  margin-bottom:1.5rem;gap:1rem;flex-wrap:wrap;
+}
+.month-name{font-family:'Bricolage';font-weight:700;font-size:clamp(20px,3vw,26px);letter-spacing:-0.02em;color:var(--text);margin-bottom:3px;}
+.month-locs{font-size:13px;color:var(--text3);}
+
+.cotm-wrap{
+  display:flex;align-items:center;gap:8px;
+  font-size:12px;color:var(--text2);white-space:nowrap;margin-top:4px;
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:100px;
+  padding:6px 14px 6px 8px;
+}
+.cotm-swatch{width:20px;height:20px;border-radius:50%;border:1px solid rgba(0,0,0,0.1);flex-shrink:0;}
+
+.sky-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;}
+@media(max-width:900px){.sky-grid{grid-template-columns:repeat(3,1fr);}}
+@media(max-width:640px){.sky-grid{grid-template-columns:repeat(2,1fr);}}
+
+/* CARD */
+.sky-card{
+  position:relative;border-radius:var(--radius);
+  overflow:hidden;aspect-ratio:4/3;cursor:pointer;
+  background:var(--surface);
+  border:1px solid var(--border);
+  box-shadow:0 1px 3px rgba(0,0,0,0.03);
+  transition:box-shadow 0.25s ease;
+}
+.sky-card:hover{box-shadow:0 12px 32px rgba(0,0,0,0.1);}
+
+.card-blur{
+  position:absolute;inset:-30px;
+  width:calc(100% + 60px);height:calc(100% + 60px);
+  object-fit:cover;
+  filter:blur(22px) saturate(1.3) brightness(1.02);
+  transition:opacity 0.4s ease;
+  z-index:0;
+}
+.card-photo{
+  position:absolute;inset:0;width:100%;height:100%;
+  object-fit:cover;opacity:0;
+  transition:opacity 0.4s ease;
+  z-index:1;
+}
+.card-fallback{position:absolute;inset:0;z-index:0;}
+
+.sky-card:hover .card-photo{opacity:1;}
+.sky-card:hover .card-blur{opacity:0;}
+
+.card-overlay{
+  position:absolute;inset:0;z-index:2;
+  display:flex;flex-direction:column;justify-content:space-between;
+  padding:12px;opacity:0;transition:opacity 0.25s ease;
+  background:linear-gradient(to bottom,rgba(0,0,0,0.25) 0%,transparent 45%,transparent 50%,rgba(0,0,0,0.55) 100%);
+}
+.sky-card:hover .card-overlay{opacity:1;}
+
+.card-location{
+  font-family:'Bricolage';font-weight:500;
+  font-size:11px;letter-spacing:0.08em;
+  text-transform:uppercase;color:rgba(255,255,255,0.95);
+  text-shadow:0 1px 6px rgba(0,0,0,0.6);
+}
+.card-actions{display:flex;gap:6px;flex-wrap:wrap;}
+.card-btn{
+  font-family:'Bricolage';font-weight:500;
+  font-size:11px;color:#fff;
+  background:rgba(0,0,0,0.4);border:1px solid rgba(255,255,255,0.25);
+  border-radius:100px;padding:6px 12px;cursor:pointer;
+  backdrop-filter:blur(10px);transition:background 0.15s;
+  white-space:nowrap;display:flex;align-items:center;gap:5px;
+}
+.card-btn:hover{background:rgba(0,0,0,0.65);}
+.card-btn svg{width:11px;height:11px;stroke:currentColor;fill:none;stroke-width:2;}
+
+/* LIGHTBOX */
+.lightbox{
+  position:fixed;inset:0;background:rgba(30,26,20,0.55);
+  backdrop-filter:blur(14px);z-index:200;
+  display:flex;align-items:center;justify-content:center;
+  opacity:0;pointer-events:none;transition:opacity 0.2s;padding:1.5rem;
+}
+.lightbox.open{opacity:1;pointer-events:all;}
+
+.lb-inner{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:22px;overflow:hidden;width:min(600px,100%);
+  transform:scale(0.97);transition:transform 0.25s ease;
+  box-shadow:0 32px 80px rgba(0,0,0,0.25);
+}
+.lightbox.open .lb-inner{transform:scale(1);}
+
+.lb-photo-wrap{position:relative;}
+.lb-photo{width:100%;aspect-ratio:16/10;object-fit:cover;display:block;background:#eee;}
+.lb-close{
+  position:absolute;top:12px;right:12px;
+  background:rgba(0,0,0,0.4);border:1px solid rgba(255,255,255,0.3);
+  border-radius:50%;width:34px;height:34px;color:#fff;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  font-size:20px;line-height:1;backdrop-filter:blur(8px);
+  transition:background 0.15s;z-index:10;
+}
+.lb-close:hover{background:rgba(0,0,0,0.65);}
+
+.lb-body{padding:1.25rem 1.5rem 1.5rem;}
+.lb-loc{font-family:'Bricolage';font-weight:500;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--text3);margin-bottom:4px;}
+.lb-name{font-family:'Bricolage';font-weight:700;font-size:22px;letter-spacing:-0.02em;color:var(--text);margin-bottom:1.1rem;}
+
+.lb-swatches{display:flex;gap:8px;margin-bottom:1.25rem;flex-wrap:wrap;}
+.lb-swatch{display:flex;flex-direction:column;align-items:center;gap:5px;cursor:pointer;}
+.lb-swatch-box{
+  width:42px;height:42px;border-radius:10px;
+  border:1px solid rgba(0,0,0,0.08);transition:transform 0.15s;
+}
+.lb-swatch:hover .lb-swatch-box{transform:scale(1.1);}
+.lb-hex{font-size:10px;font-family:monospace;color:var(--text3);letter-spacing:0.02em;}
+
+.lb-actions{display:flex;gap:8px;flex-wrap:wrap;}
+.lb-btn{
+  font-family:'Bricolage';font-weight:500;
+  font-size:12px;color:var(--text);
+  background:var(--bg);border:1px solid var(--border2);
+  border-radius:100px;padding:10px 20px;cursor:pointer;
+  display:flex;align-items:center;gap:7px;transition:background 0.15s,border-color 0.15s;
+}
+.lb-btn:hover{background:#f0ebe3;border-color:rgba(0,0,0,0.22);}
+.lb-btn svg{width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:2;}
+
+.toast{
+  position:fixed;bottom:2rem;left:50%;transform:translateX(-50%);
+  background:var(--text);color:#fff;font-family:'Bricolage';font-weight:500;font-size:12px;
+  padding:10px 20px;border-radius:100px;
+  pointer-events:none;opacity:0;transition:opacity 0.2s;
+  z-index:999;white-space:nowrap;box-shadow:0 4px 20px rgba(0,0,0,0.15);
+}
+.toast.show{opacity:1;}
+
+.create-btn{
+  font-family:'Bricolage';
+  font-weight:500;
+  font-size:13px;
+  color:var(--text2);
+  background:var(--surface);
+  border:1px solid var(--border2);
+  border-radius:100px;
+  padding:10px 18px;
+  cursor:pointer;
+  display:flex;align-items:center;gap:7px;
+  transition:border-color 0.2s,color 0.2s,background 0.2s;
+  white-space:nowrap;
+  flex-shrink:0;
+}
+.create-btn:hover{color:var(--text);border-color:rgba(0,0,0,0.25);background:#f2ede4;}
+.create-btn svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:1.6;}
+
+/* ── CREATOR MODAL ── */
+.creator-overlay{
+  position:fixed;inset:0;background:rgba(30,26,20,0.55);
+  backdrop-filter:blur(14px);z-index:300;
+  display:flex;align-items:center;justify-content:center;
+  opacity:0;pointer-events:none;transition:opacity 0.2s;padding:1.5rem;
+}
+.creator-overlay.open{opacity:1;pointer-events:all;}
+
+.creator-inner{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:22px;overflow:hidden;width:min(720px,100%);
+  max-height:90vh;overflow-y:auto;
+  transform:scale(0.97);transition:transform 0.25s ease;
+  box-shadow:0 32px 80px rgba(0,0,0,0.3);
+  position:relative;
+}
+.creator-overlay.open .creator-inner{transform:scale(1);}
+
+.creator-close{
+  position:absolute;top:16px;right:16px;
+  background:var(--bg);border:1px solid var(--border2);
+  border-radius:50%;width:34px;height:34px;color:var(--text);cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  font-size:20px;line-height:1;
+  transition:background 0.15s;z-index:10;
+}
+.creator-close:hover{background:#f0ebe3;}
+
+.creator-body{padding:2rem 2rem 1.75rem;}
+.creator-title{font-family:'Bricolage';font-weight:700;font-size:22px;letter-spacing:-0.01em;color:var(--text);margin-bottom:4px;}
+.creator-sub{font-family:'Bricolage';font-weight:500;font-size:13px;color:#6b6459;margin-bottom:1.5rem;}
+
+.creator-drop{
+  border:1.5px dashed var(--border2);
+  border-radius:16px;
+  padding:3rem 1.5rem;
+  text-align:center;
+  cursor:pointer;
+  background:var(--bg);
+  transition:border-color 0.2s,background 0.2s;
+  position:relative;
+}
+.creator-drop:hover,.creator-drop.drag-over{border-color:rgba(0,0,0,0.3);background:#f2ede4;}
+.creator-drop input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%;}
+
+.creator-drop-icon{
+  width:44px;height:44px;background:var(--surface);
+  border-radius:50%;display:flex;align-items:center;justify-content:center;
+  border:1px solid var(--border2);margin:0 auto 0.75rem;
+}
+.creator-drop-icon svg{width:20px;height:20px;stroke:var(--text2);fill:none;stroke-width:1.6;}
+.creator-drop-label{font-family:'Bricolage';font-weight:500;font-size:14px;color:var(--text);margin-bottom:0.25rem;}
+.creator-drop-sub{font-size:12px;color:var(--text3);}
+
+.creator-result{display:none;}
+.creator-preview-row{
+  display:grid;grid-template-columns:1fr 1fr;gap:12px;
+  margin-bottom:1.25rem;
+}
+@media(max-width:480px){.creator-preview-row{grid-template-columns:1fr;}}
+
+.creator-preview-box{
+  border-radius:14px;overflow:hidden;aspect-ratio:4/3;
+  border:1px solid var(--border);
+  position:relative;background:#eee;
+}
+.creator-preview-box img{width:100%;height:100%;object-fit:cover;display:block;}
+.creator-preview-box canvas{width:100%;height:100%;display:block;}
+.creator-preview-label{
+  position:absolute;bottom:8px;left:10px;
+  font-family:'Bricolage';font-weight:500;
+  font-size:10px;letter-spacing:0.08em;text-transform:uppercase;
+  color:rgba(255,255,255,0.9);text-shadow:0 1px 4px rgba(0,0,0,0.5);
+}
+
+.creator-swatches{display:flex;gap:8px;margin-bottom:1.25rem;flex-wrap:wrap;}
+.creator-swatch{display:flex;flex-direction:column;align-items:center;gap:5px;cursor:pointer;}
+.creator-swatch-box{width:40px;height:40px;border-radius:10px;border:1px solid rgba(0,0,0,0.08);transition:transform 0.15s;}
+.creator-swatch:hover .creator-swatch-box{transform:scale(1.1);}
+.creator-swatch-hex{font-size:10px;font-family:monospace;color:var(--text3);}
+
+.creator-actions{display:flex;gap:8px;flex-wrap:wrap;}
+.creator-btn{
+  font-family:'Bricolage';font-weight:500;
+  font-size:12px;color:var(--text);
+  background:var(--bg);border:1px solid var(--border2);
+  border-radius:100px;padding:10px 20px;cursor:pointer;
+  display:flex;align-items:center;gap:7px;transition:background 0.15s,border-color 0.15s;
+}
+.creator-btn:hover{background:#f0ebe3;border-color:rgba(0,0,0,0.22);}
+.creator-btn svg{width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:2;}
+
+.creator-reset{
+  font-family:'Bricolage';font-weight:500;
+  font-size:13px;color:var(--text3);
+  background:none;border:none;cursor:pointer;
+  margin-top:1.25rem;text-decoration:underline;
+  text-underline-offset:2px;
+}
+.creator-reset:hover{color:var(--text2);}
+
+@media(max-width:640px){
+  .creator-body{padding:1.5rem 1.25rem;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <h1 class="nav-title">Found in <span>Nature</span></h1>
+  <button class="create-btn" onclick="openCreator()">
+    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+    Create your own
+  </button>
+</nav>
+
+<div class="meta-bar">
+  <span>A living archive of colour</span>
+  <span class="meta-sep">·</span>
+  <span>Hover any photo to reveal it</span>
+</div>
+
+<main class="archive" id="archive"></main>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" onclick="closeLB(event)">
+  <div class="lb-inner">
+    <div class="lb-photo-wrap">
+      <img class="lb-photo" id="lb-photo" src="" alt="">
+      <button class="lb-close" onclick="closeLB(null)">×</button>
+    </div>
+    <div class="lb-body">
+      <p class="lb-loc" id="lb-loc"></p>
+      <h2 class="lb-name" id="lb-name"></h2>
+      <div class="lb-swatches" id="lb-swatches"></div>
+      <div class="lb-actions">
+        <button class="lb-btn" onclick="downloadLB()">
+          <svg viewBox="0 0 24 24"><path d="M12 3v13M8 12l4 4 4-4"/><path d="M3 17v2a2 2 0 002 2h14a2 2 0 002-2v-2"/></svg>
+          Download PNG
+        </button>
+        <button class="lb-btn" id="lb-css-btn" onclick="copyLBCSS()">
+          <svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+          Copy CSS code
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<!-- CREATOR MODAL -->
+<div class="creator-overlay" id="creator-overlay" onclick="closeCreatorOnBg(event)">
+  <div class="creator-inner">
+    <button class="creator-close" onclick="closeCreator()">×</button>
+    <div class="creator-body">
+      <h2 class="creator-title">Create your own</h2>
+      <p class="creator-sub">Upload a photo — we'll blur it into a soft gradient and pull out its colours.</p>
+
+      <div class="creator-drop" id="creator-drop">
+        <input type="file" id="creator-file-input" accept="image/*">
+        <div class="creator-drop-icon">
+          <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+        </div>
+        <p class="creator-drop-label">Drop your photo here</p>
+        <p class="creator-drop-sub">or click to browse</p>
+      </div>
+
+      <div class="creator-result" id="creator-result">
+        <div class="creator-preview-row">
+          <div class="creator-preview-box">
+            <img id="creator-original" alt="Your photo">
+            <span class="creator-preview-label">Original</span>
+          </div>
+          <div class="creator-preview-box">
+            <canvas id="creator-blur-canvas"></canvas>
+            <span class="creator-preview-label">Blurred</span>
+          </div>
+        </div>
+        <div class="creator-swatches" id="creator-swatches"></div>
+        <div class="creator-actions">
+          <button class="creator-btn" onclick="downloadCreatorBlur()">
+            <svg viewBox="0 0 24 24"><path d="M12 3v13M8 12l4 4 4-4"/><path d="M3 17v2a2 2 0 002 2h14a2 2 0 002-2v-2"/></svg>
+            Download blurred PNG
+          </button>
+          <button class="creator-btn" id="creator-css-btn" onclick="copyCreatorCSS()">
+            <svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+            Copy CSS code
+          </button>
+        </div>
+        <button class="creator-reset" onclick="resetCreator()">← Try another photo</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ─────────────────────────────────────────────────────────
+// Filenames match exactly what's already uploaded to your
+// GitHub repo. Real colours extracted from each photo.
+// ─────────────────────────────────────────────────────────
+const archive = [
+  {
+    month: "Coastal Skies",
+    locations: "Surfers Paradise · Burleigh Heads",
+    cotm: { name: "Coastal Blue", hex: "#4a9aba" },
+    skies: [
+      {
+        src: "Surfers Paradise.jpg",
+        location: "Surfers Paradise",
+        name: "Golden Dusk",
+        colors: ["#d2c3a5", "#b4c3c3", "#87a5c3", "#6987a5", "#4a6987"]
+      },
+      {
+        src: "Burleigh 2.jpg",
+        location: "Burleigh Heads",
+        name: "Crystal Blue",
+        colors: ["#69c8e1", "#3c96d2", "#0078c3", "#004ba5", "#003478"]
+      },
+      {
+        src: "GC Burleigh 1.jpg",
+        location: "Burleigh Heads",
+        name: "Sunset Picnic",
+        colors: ["#f0d050", "#e1a032", "#c87820", "#7896a8", "#4a7890"]
+      },
+    ]
+  },
+  {
+    month: "Garden Blooms",
+    locations: "Hibiscus & wildflowers",
+    cotm: { name: "Magenta Bloom", hex: "#f050c0" },
+    skies: [
+      {
+        src: "White1.jpeg",
+        location: "The Garden",
+        name: "Crimson Heart",
+        colors: ["#e0e0e0", "#d0c0c0", "#c0b0a0", "#a04050", "#404040"]
+      },
+      {
+        src: "Mix1.jpg",
+        location: "Flower Market",
+        name: "Marigold Crush",
+        colors: ["#f0a030", "#e08020", "#c07020", "#b05010", "#904010"]
+      },
+      {
+        src: "Red1.jpeg",
+        location: "The Garden",
+        name: "Scarlet Clusters",
+        colors: ["#d0d0c0", "#b0b0b0", "#c04030", "#a02818", "#203020"]
+      },
+      {
+        src: "White2.jpeg",
+        location: "The Garden",
+        name: "Ivory Petal",
+        colors: ["#f0e0d0", "#d0d0d0", "#d0c0b0", "#c0b090", "#305010"]
+      },
+      {
+        src: "Hib1.jpeg",
+        location: "The Garden",
+        name: "Coral Fringe",
+        colors: ["#f090a0", "#e0a070", "#506030", "#405010", "#203000"]
+      },
+      {
+        src: "Hib2.jpeg",
+        location: "The Garden",
+        name: "Fuchsia Bloom",
+        colors: ["#f060e0", "#f050c0", "#e040a0", "#303040", "#202020"]
+      },
+      {
+        src: "Hib3.jpeg",
+        location: "The Garden",
+        name: "Amber Petal",
+        colors: ["#f0d090", "#d0b080", "#d0a060", "#b09060", "#103040"]
+      },
+    ]
+  }
+];
+
+// ─────────────────────────────────────────────────────────
+
+let currentSky = null;
+const archiveEl = document.getElementById('archive');
+
+archive.forEach(month => {
+  const sec = document.createElement('section');
+  sec.className = 'month-section';
+
+  const hdr = document.createElement('div');
+  hdr.className = 'month-header';
+  hdr.innerHTML = `
+    <div>
+      <h2 class="month-name">${month.month}</h2>
+      <p class="month-locs">${month.locations}</p>
+    </div>
+    <div class="cotm-wrap">
+      <div class="cotm-swatch" style="background:${month.cotm.hex}"></div>
+      Favourite hue · ${month.cotm.name}
+    </div>
+  `;
+  sec.appendChild(hdr);
+
+  const grid = document.createElement('div');
+  grid.className = 'sky-grid';
+
+  month.skies.forEach(sky => {
+    const card = document.createElement('div');
+    card.className = 'sky-card';
+
+    const fallback = document.createElement('div');
+    fallback.className = 'card-fallback';
+    fallback.style.background = `linear-gradient(160deg, ${sky.colors.join(', ')})`;
+
+    const blurImg = document.createElement('img');
+    blurImg.className = 'card-blur';
+    blurImg.src = sky.src;
+    blurImg.alt = '';
+    blurImg.loading = 'lazy';
+    blurImg.crossOrigin = 'anonymous';
+    blurImg.onerror = function(){ this.style.display='none'; };
+
+    const photo = document.createElement('img');
+    photo.className = 'card-photo';
+    photo.src = sky.src;
+    photo.alt = sky.name;
+    photo.loading = 'lazy';
+    photo.onerror = function(){ this.style.display='none'; };
+
+    const overlay = document.createElement('div');
+    overlay.className = 'card-overlay';
+    const safeName = sky.name.replace(/'/g, "\\'");
+    overlay.innerHTML = `
+      <span class="card-location">${sky.location}</span>
+      <div class="card-actions">
+        <button class="card-btn" onclick="event.stopPropagation();downloadBlurred('${sky.src.replace(/'/g,"\\'")}','${safeName}')">
+          <svg viewBox="0 0 24 24"><path d="M12 3v13M8 12l4 4 4-4"/><path d="M3 17v2a2 2 0 002 2h14a2 2 0 002-2v-2"/></svg>
+          Download PNG
+        </button>
+        <button class="card-btn" onclick="event.stopPropagation();copyCSSCard(${JSON.stringify(sky.colors)},this)">
+          <svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+          Copy CSS code
+        </button>
+      </div>
+    `;
+
+    card.appendChild(fallback);
+    card.appendChild(blurImg);
+    card.appendChild(photo);
+    card.appendChild(overlay);
+    card.onclick = () => openLB(sky);
+    grid.appendChild(card);
+  });
+
+  sec.appendChild(grid);
+  archiveEl.appendChild(sec);
+});
+
+function openLB(sky) {
+  currentSky = sky;
+  document.getElementById('lb-photo').src = sky.src;
+  document.getElementById('lb-loc').textContent = sky.location.toUpperCase();
+  document.getElementById('lb-name').textContent = sky.name;
+  document.getElementById('lb-swatches').innerHTML = sky.colors.map(c => `
+    <div class="lb-swatch" onclick="copyHex('${c}')">
+      <div class="lb-swatch-box" style="background:${c}"></div>
+      <span class="lb-hex">${c}</span>
+    </div>
+  `).join('');
+  document.getElementById('lightbox').classList.add('open');
+}
+
+function closeLB(e) {
+  if (!e || e.target === document.getElementById('lightbox'))
+    document.getElementById('lightbox').classList.remove('open');
+}
+
+// ── DOWNLOAD: exports the ACTUAL BLURRED PHOTO (matches what's shown before hover) ──
+function downloadLB() {
+  if (!currentSky) return;
+  downloadBlurred(currentSky.src, currentSky.name);
+}
+
+function downloadBlurred(src, name) {
+  const img = new Image();
+  img.crossOrigin = 'anonymous';
+  img.onload = () => {
+    const W = 1200, H = 900;
+    const canvas = document.createElement('canvas');
+    canvas.width = W;
+    canvas.height = H;
+    const ctx = canvas.getContext('2d');
+
+    // Cover-fit the image into the canvas (like object-fit: cover)
+    const imgRatio = img.width / img.height;
+    const canvasRatio = W / H;
+    let drawW, drawH, offsetX, offsetY;
+    if (imgRatio > canvasRatio) {
+      drawH = H;
+      drawW = H * imgRatio;
+      offsetX = (W - drawW) / 2;
+      offsetY = 0;
+    } else {
+      drawW = W;
+      drawH = W / imgRatio;
+      offsetX = 0;
+      offsetY = (H - drawH) / 2;
+    }
+
+    // Blur radius must scale with resolution — 18px looks strong on a
+    // ~300px-wide card but barely visible on a 1200px export, so we
+    // scale it up proportionally to match the on-screen look.
+    const blurAmount = 70;
+    ctx.filter = `blur(${blurAmount}px) saturate(1.3) brightness(1.02)`;
+    // Generous overscan so the heavy blur doesn't leave soft/transparent edges
+    const pad = blurAmount * 3;
+    ctx.drawImage(img, offsetX - pad, offsetY - pad, drawW + pad * 2, drawH + pad * 2);
+
+    const a = document.createElement('a');
+    a.download = name.replace(/\s+/g, '-').toLowerCase() + '-blurred.png';
+    a.href = canvas.toDataURL('image/png');
+    a.click();
+  };
+  img.onerror = () => {
+    showToast('Could not load image for download');
+  };
+  img.src = src;
+}
+
+function copyLBCSS() {
+  if (!currentSky) return;
+  navigator.clipboard.writeText(makeCSS(currentSky.colors)).catch(()=>{});
+  const btn = document.getElementById('lb-css-btn');
+  const orig = btn.innerHTML;
+  btn.innerHTML = `<svg viewBox="0 0 24 24" style="width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:2"><polyline points="20 6 9 17 4 12"/></svg> Copied!`;
+  setTimeout(() => btn.innerHTML = orig, 2000);
+  showToast('CSS gradient copied!');
+}
+
+function copyCSSCard(colors, btn) {
+  navigator.clipboard.writeText(makeCSS(colors)).catch(()=>{});
+  const orig = btn.innerHTML;
+  btn.innerHTML = `<svg viewBox="0 0 24 24" style="width:11px;height:11px;stroke:currentColor;fill:none;stroke-width:2"><polyline points="20 6 9 17 4 12"/></svg> Copied!`;
+  setTimeout(() => btn.innerHTML = orig, 2000);
+  showToast('CSS gradient copied!');
+}
+
+function makeCSS(colors) {
+  const stops = colors.map((c, i) => `${c} ${Math.round(i / (colors.length - 1) * 100)}%`).join(', ');
+  return `background: linear-gradient(135deg, ${stops});`;
+}
+
+function copyHex(hex) {
+  navigator.clipboard.writeText(hex).catch(()=>{});
+  showToast(`${hex} copied`);
+}
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2200);
+}
+
+// ═══════════════════════════════════════════════════════
+// CREATE YOUR OWN — in-page photo-to-gradient tool
+// ═══════════════════════════════════════════════════════
+const creatorOverlay = document.getElementById('creator-overlay');
+const creatorDrop = document.getElementById('creator-drop');
+const creatorFileInput = document.getElementById('creator-file-input');
+const creatorResult = document.getElementById('creator-result');
+const creatorOriginal = document.getElementById('creator-original');
+const creatorBlurCanvas = document.getElementById('creator-blur-canvas');
+const creatorSwatchesEl = document.getElementById('creator-swatches');
+
+let creatorColors = [];
+let creatorImgObj = null;
+
+function openCreator() {
+  creatorOverlay.classList.add('open');
+}
+function closeCreator() {
+  creatorOverlay.classList.remove('open');
+}
+function closeCreatorOnBg(e) {
+  if (e.target === creatorOverlay) closeCreator();
+}
+
+creatorDrop.addEventListener('dragover', e => { e.preventDefault(); creatorDrop.classList.add('drag-over'); });
+creatorDrop.addEventListener('dragleave', () => creatorDrop.classList.remove('drag-over'));
+creatorDrop.addEventListener('drop', e => {
+  e.preventDefault();
+  creatorDrop.classList.remove('drag-over');
+  handleCreatorFile(e.dataTransfer.files[0]);
+});
+creatorFileInput.addEventListener('change', e => handleCreatorFile(e.target.files[0]));
+
+function handleCreatorFile(file) {
+  if (!file || !file.type.startsWith('image/')) return;
+  const url = URL.createObjectURL(file);
+  const img = new Image();
+  img.onload = () => {
+    creatorImgObj = img;
+    creatorOriginal.src = url;
+
+    // Extract colours from a small sampled canvas
+    const sampleCanvas = document.createElement('canvas');
+    sampleCanvas.width = 140; sampleCanvas.height = 140;
+    const sctx = sampleCanvas.getContext('2d');
+    sctx.drawImage(img, 0, 0, 140, 140);
+    const data = sctx.getImageData(0, 0, 140, 140).data;
+    creatorColors = extractCreatorColors(data);
+    renderCreatorSwatches();
+
+    // Draw blurred preview at the box's rendered size
+    drawCreatorBlurPreview();
+
+    creatorDrop.style.display = 'none';
+    creatorResult.style.display = 'block';
+  };
+  img.src = url;
+}
+
+function extractCreatorColors(data, n = 5) {
+  const buckets = {};
+  for (let i = 0; i < data.length; i += 4) {
+    if (data[i+3] < 128) continue;
+    const r = Math.round(data[i] / 22) * 22;
+    const g = Math.round(data[i+1] / 22) * 22;
+    const b = Math.round(data[i+2] / 22) * 22;
+    const key = `${r},${g},${b}`;
+    if (!buckets[key]) buckets[key] = { r, g, b, count: 0 };
+    buckets[key].count++;
+  }
+  let sorted = Object.values(buckets).sort((a, b) => b.count - a.count);
+  const picked = [];
+  for (const c of sorted) {
+    if (picked.length >= n) break;
+    let far = true;
+    for (const p of picked) {
+      const d = Math.sqrt((c.r-p.r)**2 + (c.g-p.g)**2 + (c.b-p.b)**2);
+      if (d < 45) { far = false; break; }
+    }
+    if (far) picked.push(c);
+  }
+  picked.sort((a, b) => (0.299*b.r+0.587*b.g+0.114*b.b) - (0.299*a.r+0.587*a.g+0.114*a.b));
+  return picked.map(c => `#${c.r.toString(16).padStart(2,'0')}${c.g.toString(16).padStart(2,'0')}${c.b.toString(16).padStart(2,'0')}`);
+}
+
+function renderCreatorSwatches() {
+  creatorSwatchesEl.innerHTML = creatorColors.map(c => `
+    <div class="creator-swatch" onclick="copyHex('${c}')">
+      <div class="creator-swatch-box" style="background:${c}"></div>
+      <span class="creator-swatch-hex">${c}</span>
+    </div>
+  `).join('');
+}
+
+function drawCreatorBlurPreview() {
+  if (!creatorImgObj) return;
+  const box = creatorBlurCanvas.parentElement;
+  const W = box.clientWidth || 300;
+  const H = box.clientHeight || 225;
+  creatorBlurCanvas.width = W;
+  creatorBlurCanvas.height = H;
+  const ctx = creatorBlurCanvas.getContext('2d');
+
+  const imgRatio = creatorImgObj.width / creatorImgObj.height;
+  const boxRatio = W / H;
+  let drawW, drawH, offsetX, offsetY;
+  if (imgRatio > boxRatio) {
+    drawH = H; drawW = H * imgRatio;
+    offsetX = (W - drawW) / 2; offsetY = 0;
+  } else {
+    drawW = W; drawH = W / imgRatio;
+    offsetX = 0; offsetY = (H - drawH) / 2;
+  }
+
+  ctx.filter = 'blur(18px) saturate(1.3) brightness(1.02)';
+  const pad = 30;
+  ctx.drawImage(creatorImgObj, offsetX - pad, offsetY - pad, drawW + pad*2, drawH + pad*2);
+}
+
+function downloadCreatorBlur() {
+  if (!creatorImgObj) return;
+  const W = 1200, H = 900;
+  const canvas = document.createElement('canvas');
+  canvas.width = W; canvas.height = H;
+  const ctx = canvas.getContext('2d');
+
+  const imgRatio = creatorImgObj.width / creatorImgObj.height;
+  const canvasRatio = W / H;
+  let drawW, drawH, offsetX, offsetY;
+  if (imgRatio > canvasRatio) {
+    drawH = H; drawW = H * imgRatio;
+    offsetX = (W - drawW) / 2; offsetY = 0;
+  } else {
+    drawW = W; drawH = W / imgRatio;
+    offsetX = 0; offsetY = (H - drawH) / 2;
+  }
+
+  const blurAmount = 70;
+  ctx.filter = `blur(${blurAmount}px) saturate(1.3) brightness(1.02)`;
+  const pad = blurAmount * 3;
+  ctx.drawImage(creatorImgObj, offsetX - pad, offsetY - pad, drawW + pad*2, drawH + pad*2);
+
+  const a = document.createElement('a');
+  a.download = 'my-blurred-photo.png';
+  a.href = canvas.toDataURL('image/png');
+  a.click();
+  showToast('Blurred PNG downloaded!');
+}
+
+function copyCreatorCSS() {
+  if (!creatorColors.length) return;
+  const stops = creatorColors.map((c, i) => `${c} ${Math.round(i / (creatorColors.length - 1) * 100)}%`).join(', ');
+  const css = `background: linear-gradient(135deg, ${stops});`;
+  navigator.clipboard.writeText(css).catch(() => {});
+  const btn = document.getElementById('creator-css-btn');
+  const orig = btn.innerHTML;
+  btn.innerHTML = `<svg viewBox="0 0 24 24" style="width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:2"><polyline points="20 6 9 17 4 12"/></svg> Copied!`;
+  setTimeout(() => btn.innerHTML = orig, 2000);
+  showToast('CSS gradient copied!');
+}
+
+function resetCreator() {
+  creatorResult.style.display = 'none';
+  creatorDrop.style.display = 'block';
+  creatorFileInput.value = '';
+  creatorColors = [];
+  creatorImgObj = null;
+}
+
+window.addEventListener('resize', () => {
+  if (creatorImgObj) drawCreatorBlurPreview();
+});
+</script>
+</body>
+</html>

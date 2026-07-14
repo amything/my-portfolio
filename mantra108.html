@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mantra108 — Amruta J</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  @font-face{
+    font-family:'Bricolage Grotesque Condensed';
+    src: url('BricolageGrotesque48ptCondensed-SemiBold.ttf') format('truetype');
+    font-weight:600;
+    font-style:normal;
+    font-display:swap;
+  }
+  :root{
+    --bg: #FAFAFA;
+    --surface: #FFFFFF;
+    --surface-2: #F1F0EE;
+    --heading: #1D1D1D;
+    --body-text: #4A4948;
+    --text-faint: #8C8B89;
+    --coral: #FF5C4D;
+    --coral-dim: rgba(255,92,77,0.12);
+    --line: rgba(29,29,29,0.09);
+    --font-heading: 'Bricolage Grotesque Condensed', 'Bricolage Grotesque', 'Inter', sans-serif;
+    --font-body: 'Inter', sans-serif;
+    --h1: 56px; --h2: 42px; --h3: 30px; --h4: 24px; --h5: 18px;
+    --p1: 22px; --p2: 16px; --p3: 14px;
+
+    /* Mantra108's own brand palette — used for content-specific diagrams only */
+    --m-purple: #5B3E96;
+    --m-purple-dim: rgba(91,62,150,0.10);
+    --m-lavender: #EDE7F6;
+    --m-pink: #F45FA0;
+    --m-pink-dim: rgba(244,95,160,0.12);
+    --m-dark: #2B2333;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg); color:var(--body-text);
+    font-family:var(--font-body); font-size:var(--p2); line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    cursor: url('coffee-cursor.svg') 4 12, auto;
+  }
+  a, button{ cursor: url('coffee-cursor.svg') 4 12, pointer; }
+  a{ color:inherit; text-decoration:none; }
+  h1,h2,h3,h4{ font-family:var(--font-heading); font-weight:600; color:var(--heading); line-height:1.18; letter-spacing:0.005em; }
+  ::selection{ background:var(--coral); color:#fff; }
+
+  /* ---------- Nav ---------- */
+  .topnav{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:2.5rem 8vw 0;
+  }
+  .logo-text{ font-family:var(--font-heading); font-size:26px; font-weight:600; color:var(--coral); }
+  .topnav nav a{ font-size:16px; font-weight:500; color:var(--heading); border-bottom:1px solid transparent; }
+  .topnav nav a:hover{ border-color:var(--coral); color:var(--coral); }
+
+  /* ---------- Hero ---------- */
+  .cs-hero{ max-width:920px; margin:0 auto; padding:4.5rem 8vw 2.5rem; }
+  .tag-label{
+    display:inline-block; font-size:13px; font-weight:600; color:var(--coral);
+    text-transform:uppercase; letter-spacing:0.06em; margin-bottom:1.1rem;
+  }
+  .cs-hero h1{ font-size:clamp(2rem, 4.6vw, var(--h1)); max-width:22ch; margin-bottom:1.1rem; }
+  .cs-hero .subhead{ font-size:var(--p1); color:var(--body-text); max-width:58ch; }
+
+  .meta-grid{
+    max-width:920px; margin:2.8rem auto 0; padding:0 8vw;
+    display:grid; grid-template-columns:repeat(5, 1fr); gap:1.5rem;
+    border-top:1px solid var(--line); border-bottom:1px solid var(--line);
+    padding-top:1.8rem; padding-bottom:1.8rem;
+  }
+  .meta-grid .m-label{ font-size:12px; font-weight:600; color:var(--text-faint); text-transform:uppercase; letter-spacing:0.05em; margin-bottom:0.5rem; }
+  .meta-grid .m-val{ font-size:14.5px; color:var(--heading); font-weight:500; line-height:1.5; }
+
+  /* ---------- Hero visual: page anatomy stack ---------- */
+  .hero-visual{ max-width:640px; margin:3.2rem auto 0.8rem; padding:0 8vw; }
+  .anatomy-mock{
+    background:var(--surface); border:1px solid var(--line); border-radius:14px;
+    overflow:hidden; box-shadow:0 20px 50px rgba(29,29,29,0.08);
+    padding:1.4rem;
+  }
+  .anatomy-row{
+    display:flex; align-items:center; gap:0.9rem;
+    padding:0.65rem 0.8rem; border-radius:8px; margin-bottom:0.5rem;
+  }
+  .anatomy-row:last-child{ margin-bottom:0; }
+  .anatomy-row .a-num{
+    font-family:var(--font-heading); font-size:12px; font-weight:600; color:#fff;
+    background:var(--m-purple); width:22px; height:22px; border-radius:50%;
+    display:flex; align-items:center; justify-content:center; flex:none;
+  }
+  .anatomy-row .a-label{ font-size:13.5px; font-weight:500; color:var(--heading); }
+  .anatomy-row.emph{ background:var(--m-purple-dim); }
+  .visual-caption{
+    text-align:center; font-size:14px; color:var(--text-faint); margin-top:1rem; max-width:56ch;
+    margin-left:auto; margin-right:auto;
+  }
+
+  /* ---------- Section rhythm ---------- */
+  section.cs-block{ max-width:920px; margin:0 auto; padding:4.2rem 8vw; }
+  .cs-block h2{ font-size:var(--h3); margin-bottom:1.2rem; }
+  .cs-block .kicker{ font-size:13px; font-weight:600; color:var(--coral); text-transform:uppercase; letter-spacing:0.06em; margin-bottom:0.7rem; }
+  .cs-block p{ font-size:var(--p2); color:var(--body-text); max-width:66ch; margin-bottom:1rem; }
+  .cs-block p:last-child{ margin-bottom:0; }
+  .cs-block ul{ margin:1rem 0 0; padding-left:1.2rem; max-width:62ch; }
+  .cs-block ul li{ font-size:var(--p2); color:var(--body-text); margin-bottom:0.5rem; }
+  .divider{ border:none; border-top:1px solid var(--line); max-width:920px; margin:0 auto; }
+  .pull{
+    font-family:var(--font-heading); font-size:clamp(1.3rem, 2.4vw, var(--h4));
+    color:var(--heading); line-height:1.5; max-width:64ch; margin:1.4rem 0;
+  }
+
+  /* ---------- 4-layer system grid ---------- */
+  .layer-grid{ display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-top:1.6rem; }
+  .layer-card{
+    background:var(--surface); border:1px solid var(--line); border-radius:12px;
+    padding:1.5rem 1.4rem;
+  }
+  .layer-card .n{ font-family:var(--font-heading); font-size:22px; color:var(--m-purple); margin-bottom:0.6rem; }
+  .layer-card .t{ font-size:15px; font-weight:600; color:var(--heading); margin-bottom:0.4rem; }
+  .layer-card .d{ font-size:13.5px; color:var(--text-faint); }
+  @media (max-width:640px){ .layer-grid{ grid-template-columns:1fr; } }
+
+  /* ---------- Before/After prose panels ---------- */
+  .ba-grid{ display:grid; grid-template-columns:1fr 1fr; gap:1.2rem; margin-top:1.6rem; }
+  .ba-panel{ border-radius:14px; padding:1.6rem 1.5rem; }
+  .ba-panel.before{ background:var(--surface-2); border:1px solid var(--line); }
+  .ba-panel.after{ background:var(--m-purple-dim); border:1px solid transparent; }
+  .ba-panel .ba-tag{ font-size:12px; font-weight:600; text-transform:uppercase; letter-spacing:0.06em; margin-bottom:0.7rem; display:block; }
+  .ba-panel.before .ba-tag{ color:var(--text-faint); }
+  .ba-panel.after .ba-tag{ color:var(--m-purple); }
+  .ba-panel p{ font-size:14px; color:var(--heading); margin-bottom:0; max-width:none; }
+  @media (max-width:640px){ .ba-grid{ grid-template-columns:1fr; } }
+
+  /* ---------- Color swatches ---------- */
+  .swatch-row{ display:grid; grid-template-columns:repeat(5,1fr); gap:0.8rem; margin-top:1.6rem; }
+  .swatch{ border-radius:10px; overflow:hidden; border:1px solid var(--line); }
+  .swatch .chip{ height:64px; }
+  .swatch .label{ background:var(--surface); padding:0.6rem 0.6rem; font-size:11.5px; color:var(--body-text); font-weight:500; line-height:1.4; }
+  @media (max-width:640px){ .swatch-row{ grid-template-columns:1fr 1fr; } }
+
+  /* ---------- Typography hierarchy sample ---------- */
+  .type-scale{
+    background:var(--surface); border:1px solid var(--line); border-radius:14px;
+    padding:1.8rem 1.6rem; margin-top:1.6rem; display:flex; flex-direction:column; gap:1rem;
+  }
+  .type-scale .t-row{ display:flex; align-items:baseline; gap:1rem; border-bottom:1px solid var(--line); padding-bottom:1rem; }
+  .type-scale .t-row:last-child{ border-bottom:none; padding-bottom:0; }
+  .type-scale .t-sample{ font-family:var(--font-heading); color:var(--m-purple); flex:none; }
+  .type-scale .t-desc{ font-size:13px; color:var(--text-faint); }
+
+  /* ---------- Imagery roles ---------- */
+  .img-role-grid{ display:grid; grid-template-columns:repeat(5,1fr); gap:0.8rem; margin-top:1.6rem; }
+  .img-role{ text-align:center; }
+  .img-role .role-box{
+    aspect-ratio:1/1; border-radius:10px; background:var(--m-lavender);
+    display:flex; align-items:center; justify-content:center; margin-bottom:0.6rem;
+    border:1px solid var(--line);
+  }
+  .img-role .role-box svg{ width:26px; height:26px; color:var(--m-purple); }
+  .img-role .role-name{ font-size:12px; font-weight:600; color:var(--heading); }
+  @media (max-width:640px){ .img-role-grid{ grid-template-columns:1fr 1fr; } }
+
+  /* ---------- Voice principle cards ---------- */
+  .voice-grid{ display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-top:1.6rem; }
+  .voice-card{ background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:1.4rem; }
+  .voice-card .v-tag{ font-size:12px; font-weight:600; color:var(--m-pink); text-transform:uppercase; letter-spacing:0.05em; margin-bottom:0.6rem; }
+  .voice-card .v-example{ font-family:var(--font-heading); font-size:16px; color:var(--heading); margin-top:0.6rem; }
+  @media (max-width:640px){ .voice-grid{ grid-template-columns:1fr; } }
+
+  /* ---------- Component modules ---------- */
+  .module-grid{ display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-top:1.6rem; }
+  .module-card{ background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:1.3rem 1.3rem; }
+  .module-card .mod-head{ display:flex; align-items:center; gap:0.6rem; margin-bottom:0.6rem; }
+  .module-card .mod-num{
+    font-family:var(--font-heading); font-size:11px; font-weight:600; color:#fff;
+    background:var(--m-purple); width:20px; height:20px; border-radius:50%;
+    display:flex; align-items:center; justify-content:center; flex:none;
+  }
+  .module-card .mod-title{ font-size:14.5px; font-weight:600; color:var(--heading); }
+  .module-card .mod-q{ font-size:12.5px; color:var(--m-pink); font-style:italic; margin-bottom:0.4rem; }
+  .module-card .mod-purpose{ font-size:13px; color:var(--text-faint); }
+  @media (max-width:640px){ .module-grid{ grid-template-columns:1fr; } }
+
+  /* ---------- Journey list ---------- */
+  .journey-list{ margin-top:1.8rem; position:relative; }
+  .journey-list::before{ content:''; position:absolute; left:15px; top:8px; bottom:8px; width:2px; background:var(--line); }
+  .journey-step{ position:relative; padding-left:3rem; margin-bottom:1.5rem; }
+  .journey-step:last-child{ margin-bottom:0; }
+  .journey-step .j-dot{
+    position:absolute; left:0; top:2px; width:32px; height:32px; border-radius:50%;
+    background:var(--m-purple); color:#fff; font-family:var(--font-heading); font-size:12px; font-weight:600;
+    display:flex; align-items:center; justify-content:center; z-index:1;
+  }
+  .journey-step .j-title{ font-size:15px; font-weight:600; color:var(--heading); margin-bottom:0.2rem; }
+  .journey-step .j-heading{ font-family:var(--font-heading); font-size:14px; color:var(--m-purple); margin-bottom:0.3rem; }
+  .journey-step .j-desc{ font-size:13.5px; color:var(--text-faint); }
+
+  /* ---------- Outcome tiles ---------- */
+  .outcome-grid{ display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-top:1.6rem; }
+  .outcome-tile{ background:var(--heading); border-radius:14px; padding:1.6rem 1.4rem; color:#fff; }
+  .outcome-tile .o-text{ font-size:14.5px; color:#EDEDED; }
+  @media (max-width:640px){ .outcome-grid{ grid-template-columns:1fr; } }
+
+  /* ---------- Footer nav ---------- */
+  .cs-footer{
+    max-width:920px; margin:0 auto; padding:3rem 8vw 5rem;
+    display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1.5rem;
+    border-top:1px solid var(--line);
+  }
+  .cs-footer .back-link{ font-size:15px; font-weight:500; color:var(--heading); }
+  .cs-footer .back-link:hover{ color:var(--coral); }
+  .cs-footer .contact-email{ font-size:15px; font-weight:600; color:var(--coral); }
+</style>
+</head>
+<body>
+
+<div class="topnav">
+  <a class="logo-text" href="index.html">Amruta J</a>
+  <nav><a href="index.html">← Back to portfolio</a></nav>
+</div>
+
+<div class="cs-hero">
+  <span class="tag-label">Experience Design · UI/UX · 2025</span>
+  <h1>One Community, One Rhythm</h1>
+  <p class="subhead">Long paragraphs. One-off sections. Calls to action appearing without context. I rebuilt Mantra108's Kirtan page around one clear journey — help people understand the experience, trust the people behind it, and feel ready to join.</p>
+</div>
+
+<div class="meta-grid">
+  <div><div class="m-label">Role</div><div class="m-val">UI/UX Designer<br>Experience redesign</div></div>
+  <div><div class="m-label">Timeline</div><div class="m-val">2025<br>Phased rollout</div></div>
+  <div><div class="m-label">Team</div><div class="m-val">Design<br>Content stakeholders<br>Development</div></div>
+  <div><div class="m-label">Platform</div><div class="m-val">Responsive web</div></div>
+  <div><div class="m-label">Outcome</div><div class="m-val">Live responsive experience<br>Reusable page system</div></div>
+</div>
+
+<div class="hero-visual">
+  <div class="anatomy-mock">
+    <div class="anatomy-row emph"><span class="a-num">01</span><span class="a-label">Promise — Feel Lighter</span></div>
+    <div class="anatomy-row"><span class="a-num">02</span><span class="a-label">Benefits — Why People Keep Coming Back</span></div>
+    <div class="anatomy-row"><span class="a-num">03</span><span class="a-label">Explanation — What Even Is Kirtan?</span></div>
+    <div class="anatomy-row"><span class="a-num">04</span><span class="a-label">Reassurance — Why Kirtan Hits Different</span></div>
+    <div class="anatomy-row"><span class="a-num">05</span><span class="a-label">Experience — What to Expect</span></div>
+    <div class="anatomy-row"><span class="a-num">06</span><span class="a-label">Proof — What People Are Saying</span></div>
+    <div class="anatomy-row"><span class="a-num">07</span><span class="a-label">People — Who's Behind This</span></div>
+    <div class="anatomy-row"><span class="a-num">08</span><span class="a-label">Belonging — Want to Join the Crew?</span></div>
+    <div class="anatomy-row"><span class="a-num">09</span><span class="a-label">Context — Kirtan History</span></div>
+    <div class="anatomy-row emph"><span class="a-num">10</span><span class="a-label">Action — When &amp; Where</span></div>
+  </div>
+  <p class="visual-caption">One clear journey replaced a page built section by section — from first curiosity to registration.</p>
+</div>
+
+<section class="cs-block">
+  <span class="kicker">Overview</span>
+  <p>Mantra108 creates community experiences around music, meditation and human connection. Kirtan is one of its central offerings — a participatory experience combining live music, mantra and shared energy.</p>
+  <p><b style="color:var(--heading);">Problem</b> — An information-heavy event page explained Kirtan in detail but did not help first-time visitors understand what attending would feel like.</p>
+</section>
+
+<hr class="divider">
+
+<section class="cs-block">
+  <span class="kicker">The Story</span>
+  <h2>The page had all the information and none of the feeling</h2>
+  <p>The original Kirtan page had grown section by section. It included the event description, benefits, Kirtan history, imagery, a testimonial and registration details. Technically, almost everything a visitor needed was there.</p>
+  <p>But the experience did not form a clear story. A first-time visitor was asked to book before understanding what Kirtan was. Benefits were hidden inside paragraphs. History appeared before the contemporary experience had been established. Images documented the community but did not explain what attending would actually feel like.</p>
+  <p class="pull">The page could describe Kirtan. It could not help someone imagine being there.</p>
+  <p>This was not simply a visual-polish problem — it was a comprehension, trust and sequencing problem. So I didn't begin by restyling individual sections. I began with the experience model: what should someone understand, feel and believe before being asked to register?</p>
+  <p>That led to one consistent journey: <b style="color:var(--heading);">Promise → Benefits → Explanation → Experience → Proof → People → Community → Context → Action.</b></p>
+  <p>The redesign visitors see is the surface. The system underneath is what keeps the experience clear.</p>
+</section>
+
+<hr class="divider">
+
+<section class="cs-block">
+  <span class="kicker">The System</span>
+  <h2>A framework, not a page makeover</h2>
+  <p>The fastest option would have been to update the hero, shorten a few paragraphs and modernise the interface. That would have improved the page visually, but the underlying problems would have remained. Instead, I established a reusable event experience system built around four layers — the Kirtan page became the first full expression of it.</p>
+  <div class="layer-grid">
+    <div class="layer-card"><div class="n">01</div><div class="t">Foundations</div><div class="d">Colour, typography, spacing, imagery and interaction roles.</div></div>
+    <div class="layer-card"><div class="n">02</div><div class="t">Components</div><div class="d">Reusable interface elements with defined purposes.</div></div>
+    <div class="layer-card"><div class="n">03</div><div class="t">Content patterns</div><div class="d">Consistent ways to explain unfamiliar experiences.</div></div>
+    <div class="layer-card"><div class="n">04</div><div class="t">Page architecture</div><div class="d">A repeatable sequence for moving visitors from curiosity to action.</div></div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<section class="cs-block">
+  <span class="kicker">01 · Colour</span>
+  <h2>Colour was given a role, not just a place</h2>
+  <p><b style="color:var(--heading);">Before</b> — purple appeared across the page, but it didn't always communicate hierarchy. Pale backgrounds, buttons, decorative shapes and content sections competed without clearly defined roles.</p>
+  <p><b style="color:var(--heading);">After</b> — the palette was organised around specific responsibilities:</p>
+  <div class="swatch-row">
+    <div class="swatch"><div class="chip" style="background:var(--m-purple);"></div><div class="label">Deep purple — brand &amp; primary actions</div></div>
+    <div class="swatch"><div class="chip" style="background:var(--m-lavender);"></div><div class="label">Soft lavender — page surfaces</div></div>
+    <div class="swatch"><div class="chip" style="background:var(--m-pink);"></div><div class="label">Pink accent — energy &amp; movement</div></div>
+    <div class="swatch"><div class="chip" style="background:#FFFFFF; border-right:1px solid var(--line);"></div><div class="label">White — cards &amp; profiles</div></div>
+    <div class="swatch"><div class="chip" style="background:var(--m-dark);"></div><div class="label">Dark neutral — long-form text</div></div>
+  </div>
+  <p style="margin-top:1.4rem;">The deeper purple guides action. Lavender creates breathing room. Pink carries the expressive energy of the community without overwhelming the page.</p>
+</section>
+
+<hr class="divider">
+
+<section class="cs-block">
+  <span class="kicker">02 · Typography</span>
+  <h2>A hierarchy built for scanning, then reading deeper</h2>
+  <p><b style="color:var(--heading);">Before</b> — the page relied heavily on small paragraphs and similar text treatments; headings separated sections, but the overall hierarchy didn't make the long page easy to scan.</p>
+  <p><b style="color:var(--heading);">After</b> — a defined hierarchy lets visitors scan the headline, understand the supporting message, then read deeper when interested:</p>
+  <div class="type-scale">
+    <div class="t-row"><div class="t-sample" style="font-size:28px; font-weight:600;">Feel Lighter</div><div class="t-desc">Emotional hero statement</div></div>
+    <div class="t-row"><div class="t-sample" style="font-size:20px; font-weight:600;">Wait… What Even Is Kirtan?</div><div class="t-desc">Conversational subheading</div></div>
+    <div class="t-row"><div class="t-sample" style="font-size:15px; font-weight:500; color:var(--body-text); font-family:var(--font-body);">Supporting body copy explaining the experience</div><div class="t-desc">Supporting body text</div></div>
+    <div class="t-row"><div class="t-sample" style="font-size:13px; font-weight:500; color:var(--text-faint); font-family:var(--font-body);">Event details &amp; metadata</div><div class="t-desc">Practical information</div></div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<section class="cs-block">
+  <span class="kicker">03 · Spacing &amp; Layout</span>
+  <h2>A deliberate pace, not one long wall of content</h2>
+  <p><b style="color:var(--heading);">Before</b> — sections had different visual densities; long paragraphs, isolated images and large galleries created an uneven reading pace.</p>
+  <p><b style="color:var(--heading);">After</b> — a consistent section rhythm using shared content widths, repeatable vertical spacing, defined card padding and consistent image proportions. The page now alternates between concise information, strong imagery and human proof.</p>
+</section>
+
+<hr class="divider">
+
+<section class="cs-block">
+  <span class="kicker">04 · Imagery</span>
+  <h2>Photography given a job, not just a place</h2>
+  <p><b style="color:var(--heading);">Before</b> — real moments, but images varied significantly in scale, placement and purpose. <b style="color:var(--heading);">After</b> — each image type was given a defined role:</p>
+  <div class="img-role-grid">
+    <div class="img-role"><div class="role-box"><svg viewBox="0 0 24 24" fill="none"><path d="M4 17l5-6 4 5 3-4 4 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><rect x="3" y="4" width="18" height="16" rx="2" stroke="currentColor" stroke-width="1.8"/></svg></div><div class="role-name">Hero</div></div>
+    <div class="img-role"><div class="role-box"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="3" stroke="currentColor" stroke-width="1.8"/><path d="M5 20c1.5-4 5-5 7-5s5.5 1 7 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></div><div class="role-name">Experience</div></div>
+    <div class="img-role"><div class="role-box"><svg viewBox="0 0 24 24" fill="none"><circle cx="8" cy="9" r="2.5" stroke="currentColor" stroke-width="1.8"/><circle cx="16" cy="9" r="2.5" stroke="currentColor" stroke-width="1.8"/><path d="M3 19c.7-3 3-4.5 5-4.5s4.3 1.5 5 4.5M11 19c.7-3 3-4.5 5-4.5s4.3 1.5 5 4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></div><div class="role-name">Community</div></div>
+    <div class="img-role"><div class="role-box"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="1.8"/><path d="M4 20c1.8-4.5 5.5-6 8-6s6.2 1.5 8 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></div><div class="role-name">Profile</div></div>
+    <div class="img-role"><div class="role-box"><svg viewBox="0 0 24 24" fill="none"><path d="M4 6h16M4 12h16M4 18h10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></div><div class="role-name">Context</div></div>
+  </div>
+  <p class="visual-caption">Consistent rounded frames and proportions let different photographs feel part of one visual family.</p>
+</section>
+
+<hr class="divider">
+
+<section class="cs-block">
+  <span class="kicker">Content as part of the system</span>
+  <h2>One voice across every section</h2>
+  <p>The visual inconsistency was only one part of the problem. The original experience shifted between spiritual language, formal explanation, event promotion and transactional booking copy — which could make the page harder to interpret for someone unfamiliar with Kirtan. The redesigned voice follows four principles:</p>
+  <div class="voice-grid">
+    <div class="voice-card">
+      <div class="v-tag">Direct</div>
+      <p style="margin-bottom:0;">Use language people understand immediately, instead of an abstract description of meditation.</p>
+      <div class="v-example">"Feel Lighter"</div>
+    </div>
+    <div class="voice-card">
+      <div class="v-tag">Conversational</div>
+      <p style="margin-bottom:0;">Use headings that reflect the questions a visitor may already be thinking.</p>
+      <div class="v-example">"Wait… What Even Is Kirtan?"</div>
+    </div>
+    <div class="voice-card">
+      <div class="v-tag">Reassuring</div>
+      <p style="margin-bottom:0;">Address uncertainty without making it feel like an objection.</p>
+      <div class="v-example">"No experience needed. Come as you are."</div>
+    </div>
+    <div class="voice-card">
+      <div class="v-tag">Human</div>
+      <p style="margin-bottom:0;">Describe the experience through feelings, people and real participation — not only spiritual terminology.</p>
+    </div>
+  </div>
+  <p style="margin-top:1.4rem;">This shared voice became part of the design system because the experience wouldn't remain consistent through components alone — a reusable card with inconsistent language would still create an inconsistent product.</p>
+</section>
+
+<hr class="divider">
+
+<section class="cs-block">
+  <span class="kicker">Component System</span>
+  <h2>Every module has one job</h2>
+  <p>The page was rebuilt from a collection of independent sections into a family of reusable modules — each answering a specific visitor question.</p>
+  <div class="module-grid">
+    <div class="module-card"><div class="mod-head"><span class="mod-num">1</span><span class="mod-title">Hero</span></div><div class="mod-q">"Why should I care?"</div><div class="mod-purpose">Creates emotional relevance through a short promise, plain-language explanation, authentic imagery and a primary action.</div></div>
+    <div class="module-card"><div class="mod-head"><span class="mod-num">2</span><span class="mod-title">Benefit cards</span></div><div class="mod-q">"What will I get from this?"</div><div class="mod-purpose">Turns long explanations into concise, scannable reasons to attend.</div></div>
+    <div class="module-card"><div class="mod-head"><span class="mod-num">3</span><span class="mod-title">Story split</span></div><div class="mod-q">"What exactly is this?"</div><div class="mod-purpose">Explains an unfamiliar idea with one strong image and a conversational heading — no academic description.</div></div>
+    <div class="module-card"><div class="mod-head"><span class="mod-num">4</span><span class="mod-title">Experience cards</span></div><div class="mod-q">"Will I feel comfortable there?"</div><div class="mod-purpose">Turns concerns into reassurance by pairing an authentic image with one clear message.</div></div>
+    <div class="module-card"><div class="mod-head"><span class="mod-num">5</span><span class="mod-title">Media feature</span></div><div class="mod-q">"What does it actually feel like?"</div><div class="mod-purpose">Gives atmosphere priority through video, since music and movement are better understood through experience.</div></div>
+    <div class="module-card"><div class="mod-head"><span class="mod-num">6</span><span class="mod-title">Testimonial system</span></div><div class="mod-q">"Did other people enjoy it?"</div><div class="mod-purpose">Builds trust through multiple attendee stories in one consistent, carousel-navigable format.</div></div>
+    <div class="module-card"><div class="mod-head"><span class="mod-num">7</span><span class="mod-title">People cards</span></div><div class="mod-q">"Who is behind this experience?"</div><div class="mod-purpose">Gives every team member equal visual treatment — portrait, name, role and a short contribution statement.</div></div>
+    <div class="module-card"><div class="mod-head"><span class="mod-num">8</span><span class="mod-title">Community callout</span></div><div class="mod-q">"Can I become more involved?"</div><div class="mod-purpose">Introduces volunteering as a separate but connected pathway from ticket registration.</div></div>
+    <div class="module-card"><div class="mod-head"><span class="mod-num">9</span><span class="mod-title">Context block</span></div><div class="mod-q">"Where does this experience come from?"</div><div class="mod-purpose">Preserves cultural and historical meaning, placed deliberately after the experience is understood.</div></div>
+    <div class="module-card"><div class="mod-head"><span class="mod-num">10</span><span class="mod-title">Event details</span></div><div class="mod-q">"When, where and how do I join?"</div><div class="mod-purpose">Consolidates schedule, location, image and registration into one predictable destination.</div></div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<section class="cs-block">
+  <span class="kicker">Deep Dive</span>
+  <h2>The event storytelling pattern</h2>
+  <p>The most important system decision wasn't an individual button or card — it was the order in which the modules appear. Each part of the page prepares the visitor for the next one.</p>
+  <div class="journey-list">
+    <div class="journey-step"><div class="j-dot">01</div><div class="j-title">Promise</div><div class="j-heading">Feel Lighter</div><div class="j-desc">Create an emotional reason to continue.</div></div>
+    <div class="journey-step"><div class="j-dot">02</div><div class="j-title">Benefits</div><div class="j-heading">Why People Keep Coming Back</div><div class="j-desc">Make the value understandable within seconds.</div></div>
+    <div class="journey-step"><div class="j-dot">03</div><div class="j-title">Explanation</div><div class="j-heading">What Even Is Kirtan?</div><div class="j-desc">Introduce the unfamiliar idea in approachable language.</div></div>
+    <div class="journey-step"><div class="j-dot">04</div><div class="j-title">Reassurance</div><div class="j-heading">Why Kirtan Hits Different</div><div class="j-desc">Remove concerns around experience, performance and participation.</div></div>
+    <div class="journey-step"><div class="j-dot">05</div><div class="j-title">Experience</div><div class="j-heading">What to Expect in a Session</div><div class="j-desc">Show the atmosphere rather than adding more explanation.</div></div>
+    <div class="journey-step"><div class="j-dot">06</div><div class="j-title">Proof</div><div class="j-heading">What People Are Saying</div><div class="j-desc">Allow previous attendees to validate the promise.</div></div>
+    <div class="journey-step"><div class="j-dot">07</div><div class="j-title">People</div><div class="j-heading">Who's Behind This</div><div class="j-desc">Build trust through the humans creating the experience.</div></div>
+    <div class="journey-step"><div class="j-dot">08</div><div class="j-title">Belonging</div><div class="j-heading">Want to Join the Crew?</div><div class="j-desc">Extend participation beyond a single transaction.</div></div>
+    <div class="journey-step"><div class="j-dot">09</div><div class="j-title">Context</div><div class="j-heading">Kirtan History</div><div class="j-desc">Provide cultural meaning after contemporary relevance is established.</div></div>
+    <div class="journey-step"><div class="j-dot">10</div><div class="j-title">Action</div><div class="j-heading">When &amp; Where</div><div class="j-desc">Bring the journey to a clear next step.</div></div>
+  </div>
+  <p style="margin-top:1.6rem;">The content can change from one event to another. The decision logic remains consistent — that's what makes it a system rather than a fixed landing-page template.</p>
+</section>
+
+<hr class="divider">
+
+<section class="cs-block">
+  <span class="kicker">Responsive Behaviour</span>
+  <h2>One hierarchy across every screen size</h2>
+  <ul>
+    <li>Multi-column cards stack into a clear reading order</li>
+    <li>Primary actions expand for easier mobile interaction</li>
+    <li>Text and imagery rearrange without changing the narrative sequence</li>
+    <li>Consistent image cropping across viewport sizes</li>
+    <li>Reduced decorative elements where they could compete with content</li>
+    <li>Testimonial and benefit groups adapt to swipeable or stacked formats</li>
+    <li>Event details stay grouped rather than breaking into disconnected fragments</li>
+  </ul>
+  <p style="margin-top:1.2rem;">The desktop page uses width to create visual energy. The mobile version uses sequence and spacing to preserve clarity.</p>
+</section>
+
+<hr class="divider">
+
+<section class="cs-block">
+  <span class="kicker">Before &amp; After</span>
+  <div class="ba-grid">
+    <div class="ba-panel before">
+      <span class="ba-tag">Before</span>
+      <p>Sections behaved differently from each other. Benefits lived inside paragraphs. Photography had no consistent role. Calls to action appeared without a clear confidence-building sequence. Historical, emotional and practical information competed within the same hierarchy.</p>
+    </div>
+    <div class="ba-panel after">
+      <span class="ba-tag">After</span>
+      <p>Every section belongs to the same family. Colour communicates hierarchy. Typography creates a consistent reading pattern. Components have defined responsibilities. Calls to action follow moments of understanding and trust.</p>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<section class="cs-block">
+  <span class="kicker">Outcome</span>
+  <p>The redesign created more than a refreshed Kirtan page — it established a reusable foundation for how Mantra108 can introduce experiences online.</p>
+  <div class="outcome-grid">
+    <div class="outcome-tile"><div class="o-text">One visual hierarchy across colour, type and imagery</div></div>
+    <div class="outcome-tile"><div class="o-text">One conversational voice across every section</div></div>
+    <div class="outcome-tile"><div class="o-text">One modular component family, ready to reuse</div></div>
+    <div class="outcome-tile"><div class="o-text">One responsive framework for future event pages</div></div>
+  </div>
+  <p style="margin-top:1.6rem;">Visitors can now understand what Kirtan is, see what attending looks like, meet the community and find practical information — without navigating a dense or fragmented experience. The redesigned experience created a clearer path from first-time discovery to event registration, and established a reusable framework for future Mantra108 event pages.</p>
+</section>
+
+<div class="pull" style="max-width:920px; margin:0 auto; padding:1rem 8vw 4.2rem;">
+  "The system doesn't make every event page look identical. It makes every event feel recognisably Mantra108."
+</div>
+
+<footer class="cs-footer">
+  <a class="back-link" href="index.html">← Back to portfolio</a>
+  <a class="contact-email" href="mailto:amruta.inbox@gmail.com">amruta.inbox@gmail.com</a>
+</footer>
+</body>
+</html>

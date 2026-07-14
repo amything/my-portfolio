@@ -270,7 +270,20 @@
   .pair-grid{
     display:grid; grid-template-columns:1fr 1fr; gap:2.4rem;
   }
-  .pair-card{ display:flex; flex-direction:column; }
+  .pair-card{
+    display:flex; flex-direction:column;
+    cursor:pointer;
+    padding:1rem;
+    margin:-1rem;
+    border-radius:16px;
+    transition:background-color 0.3s ease;
+  }
+  .pair-card:hover{
+    background:var(--surface-2);
+  }
+  .pair-card:hover .pair-visual{
+    border-color:rgba(29,29,29,0.14);
+  }
   .pair-card .pair-visual{
     aspect-ratio: 4/3; border-radius:8px; overflow:hidden;
     background:var(--surface-2); border:1px solid var(--line);
@@ -806,6 +819,16 @@
   // Whole project card is clickable — set data-href on the <article> to point elsewhere if needed
   document.querySelectorAll('.project').forEach(card => {
     card.addEventListener('click', () => {
+      const href = card.dataset.href || '#';
+      if(href !== '#') window.location.href = href;
+    });
+  });
+
+  // Each campaign card inside a paired row (JBL, Harman Kardon, Sterling Holidays, Toyota)
+  // is independently clickable — set data-href on the .pair-card to point to its own page.
+  document.querySelectorAll('.pair-card').forEach(card => {
+    card.addEventListener('click', (e) => {
+      e.stopPropagation();
       const href = card.dataset.href || '#';
       if(href !== '#') window.location.href = href;
     });

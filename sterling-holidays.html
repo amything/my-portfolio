@@ -81,15 +81,11 @@
     letter-spacing:0.01em;
   }
   .back-link{
-    display:inline-flex; align-items:center; gap:0.6rem;
     font-family:var(--font-body); font-size:var(--p2); font-weight:500;
     color:var(--heading);
-    border-bottom:1px solid transparent;
-    transition:border-color 0.2s ease, color 0.2s ease;
+    transition:color 0.2s ease;
   }
-  .back-link:hover{ color:var(--coral); border-color:var(--coral); }
-  .back-link svg{ transition:transform 0.2s ease; }
-  .back-link:hover svg{ transform:translateX(-3px); }
+  .back-link:hover{ color:var(--coral); }
 
   /* ---------- Case study header ---------- */
   .case-header{
@@ -103,21 +99,21 @@
     border:1px solid var(--coral); color:var(--coral);
   }
   .project-year{ font-family:var(--font-body); color:var(--text-faint); font-size:var(--p3); }
-  .case-header h1{ font-size:clamp(2.2rem, 4.6vw, var(--h1)); max-width:20ch; margin-bottom:2rem; }
-  .case-header .lede{
-    font-family:var(--font-body); font-size:var(--p1); font-weight:400;
-    color:var(--body-text); max-width:62ch; line-height:1.6;
-  }
-  .skill-chips{ display:flex; flex-wrap:wrap; gap:0.5rem; margin-top:2rem; }
+  .case-header h1{ font-size:clamp(2.2rem, 4.6vw, var(--h1)); max-width:20ch; }
+  .skill-chips{ display:flex; flex-wrap:wrap; gap:0.5rem; margin-top:1.4rem; }
   .chip{
     font-family:var(--font-body); font-size:var(--p3); color:var(--body-text); background:var(--surface);
     border:1px solid var(--line); padding:0.3rem 0.7rem; border-radius:20px;
   }
 
   /* ---------- Gallery blocks ---------- */
-  main.case-body{ max-width:1280px; margin:0 auto; padding: 0 8vw 6rem; }
+  main.case-body{
+    max-width:1280px; margin:0 auto; padding: 0 8vw 6rem;
+    display:flex; flex-direction:column; gap:1.6rem;
+  }
 
-  .block{ padding: 2.6rem 0; }
+  .block{ padding:0; }
+  .block.divider-block{ padding:0.4rem 0; }
 
   .hero-shot{
     width:100%; border-radius:16px; overflow:hidden;
@@ -164,11 +160,8 @@
 <body>
 
 <div class="topnav">
-  <span class="logo-text">Amruta J</span>
-  <a class="back-link" href="index.html">
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M17 7L7 17M7 17H16M7 17V8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    Back to portfolio
-  </a>
+  <a class="logo-text" href="index.html">Amruta J</a>
+  <a class="back-link" href="index.html">← Back to portfolio</a>
 </div>
 
 <header class="case-header">
@@ -177,7 +170,6 @@
     <span class="project-year">2018</span>
   </div>
   <h1>Sterling Holidays</h1>
-  <p class="lede">Sterling Holidays is a prominent Indian hospitality brand specializing in providing vacation ownership and leisure travel experiences. During my time at Webenza, I had the opportunity to work for Sterling Holidays. I managed their social media, EDM, website banners, and all supporting brand assets. Creatively, my aim was to imbue all the design work with a sense of adventure, freedom, and the possibilities that Sterling Holidays opens up to it's travelers.</p>
   <div class="skill-chips">
     <span class="chip">Art Direction</span><span class="chip">Campaign Design</span><span class="chip">Print &amp; Digital</span>
   </div>
@@ -200,7 +192,7 @@
     </div>
   </div>
 
-  <div class="block"><div class="divider"></div></div>
+  <div class="block divider-block"><div class="divider"></div></div>
 
   <div class="block">
     <div class="grid-2">
@@ -211,7 +203,7 @@
     </div>
   </div>
 
-  <div class="block"><div class="divider"></div></div>
+  <div class="block divider-block"><div class="divider"></div></div>
 
   <div class="block">
     <div class="grid-2">

@@ -270,20 +270,7 @@
   .pair-grid{
     display:grid; grid-template-columns:1fr 1fr; gap:2.4rem;
   }
-  .pair-card{
-    display:flex; flex-direction:column;
-    cursor:pointer;
-    padding:1rem;
-    margin:-1rem;
-    border-radius:16px;
-    transition:background-color 0.3s ease;
-  }
-  .pair-card:hover{
-    background:var(--surface-2);
-  }
-  .pair-card:hover .pair-visual{
-    border-color:rgba(29,29,29,0.14);
-  }
+  .pair-card{ display:flex; flex-direction:column; }
   .pair-card .pair-visual{
     aspect-ratio: 4/3; border-radius:8px; overflow:hidden;
     background:var(--surface-2); border:1px solid var(--line);
@@ -541,7 +528,7 @@
 
     <article class="project visible" id="p2026" data-year="2026" data-href="mantra108.html">
       <div class="project-visual">
-        <img src="https://raw.githubusercontent.com/amything/my-portfolio/main/Mantra108.png" alt="Mantra108">
+        <img src="https://raw.githubusercontent.com/amything/my-portfolio/main/Mantra108%20Thumbnail.png" alt="Mantra108">
       </div>
       <div class="project-info">
         <div class="tag-row"><span class="tag">UIUX Case study</span><span class="project-year">2026</span></div>
@@ -567,9 +554,9 @@
       </div>
     </article>
 
-    <article class="project" id="p2023" data-year="2023" data-href="immismart.html">
+    <article class="project" id="p2023" data-year="2023">
       <div class="project-visual">
-        <img src="https://raw.githubusercontent.com/amything/my-portfolio/main/Guage.png" alt="ImmiSmart project visual">
+        <img src="https://raw.githubusercontent.com/amything/my-portfolio/main/Mix1.jpg" alt="ImmiSmart project visual">
       </div>
       <div class="project-info">
         <div class="tag-row"><span class="tag">UIUX Case Study</span><span class="project-year">2023</span></div>
@@ -612,7 +599,7 @@
       <div class="pair-grid">
         <div class="pair-card">
           <div class="pair-visual">
-            <img src="https://raw.githubusercontent.com/amything/my-portfolio/main/Surfers%20Paradise.jpg" alt="Sterling Holidays — Surfers Paradise campaign">
+            <img src="https://raw.githubusercontent.com/amything/my-portfolio/main/Sterling%20Holiday%20Thumbnail.png" alt="Sterling Holidays campaign">
           </div>
           <div class="tag-row"><span class="tag">Visual Design</span><span class="project-year">2018</span></div>
           <h3>Sterling Holidays</h3>
@@ -819,16 +806,6 @@
   // Whole project card is clickable — set data-href on the <article> to point elsewhere if needed
   document.querySelectorAll('.project').forEach(card => {
     card.addEventListener('click', () => {
-      const href = card.dataset.href || '#';
-      if(href !== '#') window.location.href = href;
-    });
-  });
-
-  // Each campaign card inside a paired row (JBL, Harman Kardon, Sterling Holidays, Toyota)
-  // is independently clickable — set data-href on the .pair-card to point to its own page.
-  document.querySelectorAll('.pair-card').forEach(card => {
-    card.addEventListener('click', (e) => {
-      e.stopPropagation();
       const href = card.dataset.href || '#';
       if(href !== '#') window.location.href = href;
     });

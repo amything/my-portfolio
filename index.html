@@ -501,12 +501,14 @@
 
   footer{
     margin-top:0; padding: 3.5rem 8vw 3rem;
-    display:flex; justify-content:space-between; align-items:flex-end;
+    display:flex; justify-content:space-between; align-items:flex-start;
     flex-wrap:wrap; gap:2rem;
     border-top:1px solid var(--line);
   }
   footer h2{ font-size:var(--h2); max-width:30ch; }
   footer .contact-links{ display:flex; flex-direction:column; align-items:flex-end; gap:1rem; font-family:var(--font-body); font-size:var(--p3); }
+  footer .hero-cta{ margin-top:0; }
+  footer .hero-cta.footer-connect{ margin-bottom:-0.5rem; }
   footer .contact-email{ color:var(--coral); font-size:var(--p2); font-weight:500; }
   footer .contact-email:hover{ opacity:0.8; }
   footer .social-icons{ display:flex; align-items:center; gap:1.1rem; }
@@ -559,12 +561,6 @@
 
 <section class="hero">
   <h1 class="headline">Product &amp; Digital Designer<span class="headline-sub">My walks and designs are fueled by coffee.</span></h1>
-  <a class="hero-cta" href="mailto:amruta.inbox@gmail.com">
-    Let's connect
-    <span class="dot">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M5 12H19M19 12L13 6M19 12L13 18" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    </span>
-  </a>
   <button class="copy-hint" id="copyEmailHint" type="button">
     Press <kbd>C</kbd> to copy my email address
   </button>
@@ -761,6 +757,9 @@
 <footer id="contact">
   <h2>From concept to creation,<br>let's make it happen</h2>
   <div class="contact-links">
+    <a class="hero-cta footer-connect" href="mailto:amruta.inbox@gmail.com">
+      Let's connect
+    </a>
     <a class="contact-email" href="mailto:amruta.inbox@gmail.com">amruta.inbox@gmail.com</a>
     <div class="social-icons">
       <a href="mailto:amruta.inbox@gmail.com" aria-label="Email">

@@ -420,35 +420,41 @@
     font-family:var(--font-body); color:var(--body-text); font-size:var(--p2);
     max-width:58ch; margin-bottom:2.4rem; line-height:1.7;
   }
-  .side-project{ margin-bottom:4.4rem; }
-  .side-project:last-child{ margin-bottom:0; }
-  .side-project-title{ font-size:var(--h4); margin:0 0 0.5rem; }
-  .side-project-desc{
-    font-family:var(--font-body); color:var(--body-text); font-size:var(--p2);
-    max-width:58ch; margin:0 0 1.4rem; line-height:1.7;
+  .side-projects-grid{
+    display:grid; grid-template-columns:1fr 1fr; gap:1.8rem;
   }
-  .side-project-frame{
+  .side-project{
+    display:block;
+    border-radius:14px;
+    transition:background-color 0.25s ease;
+    padding:0.9rem; margin:-0.9rem;
+  }
+  .side-project:hover{ background:var(--surface-2); }
+  .side-project-thumb{
     position:relative;
-    border-radius:20px;
+    aspect-ratio:16/10;
+    border-radius:12px;
     overflow:hidden;
     border:1px solid var(--line);
     background:var(--surface-2);
-    box-shadow:0 24px 60px -24px rgba(29,29,29,0.16);
+    margin-bottom:1.1rem;
   }
-  .side-project-frame iframe{
-    width:100%; height:420px; border:none; display:block;
+  .side-project-thumb img{ width:100%; height:100%; object-fit:cover; display:block; }
+  .side-project-thumb .ph-label{
+    position:absolute; inset:0;
+    display:flex; align-items:center; justify-content:center;
+    color:var(--text-faint); font-size:var(--p3); text-align:center; padding:1rem;
   }
-  .side-project-link{
-    display:inline-flex; align-items:center; gap:0.5rem;
-    margin-top:1.5rem;
-    font-family:var(--font-body); font-size:var(--p3); font-weight:500;
-    color:var(--heading);
-    border-bottom:1px solid transparent;
-    transition:border-color 0.2s ease, color 0.2s ease;
+  .side-project-title{ font-size:var(--h5); margin:0 0 0.4rem; display:flex; align-items:center; gap:0.5rem; }
+  .side-project-title svg{ color:var(--text-faint); transition:transform 0.2s ease, color 0.2s ease; }
+  .side-project:hover .side-project-title svg{ transform:translate(2px,-2px); color:var(--coral); }
+  .side-project-desc{
+    font-family:var(--font-body); color:var(--body-text); font-size:var(--p3);
+    max-width:44ch; margin:0; line-height:1.6;
   }
-  .side-project-link:hover{ color:var(--coral); border-color:var(--coral); }
-  .side-project-link svg{ transition:transform 0.2s ease; }
-  .side-project-link:hover svg{ transform:translate(2px,-2px); }
+  @media (max-width:640px){
+    .side-projects-grid{ grid-template-columns:1fr; }
+  }
 
   /* ---------- Testimonials (3-card) ---------- */
   .testimonials{
@@ -590,7 +596,6 @@
     .topnav{ padding:2rem 6vw 0; }
     .hero{ padding:4rem 6vw 3rem; }
     .side-projects{ padding:3.5rem 6vw 4rem; }
-    .side-project-frame iframe{ height:340px; }
     .testimonials{ padding:4.5rem 6vw; }
     .testi-card-shell.side{ display:none; }
     .testi-card-shell.active{ flex:1 1 100%; max-width:none; padding:2.4rem 1.8rem; border-radius:22px; }
@@ -767,27 +772,29 @@
   <h2>A space to tinker</h2>
   <p class="desc">I'm teaching myself to code and experimenting with new AI tools on the side — these little apps are what's come out of it.</p>
 
-  <div class="side-project">
-    <h3 class="side-project-title">Found in Nature</h3>
-    <p class="side-project-desc">A gallery app for browsing gradient skies, built while getting comfortable with front-end code.</p>
-    <div class="side-project-frame">
-      <iframe src="gradient-skies.html" title="Found in Nature — a side project" loading="lazy"></iframe>
-    </div>
-    <a class="side-project-link" href="gradient-skies.html" target="_blank" rel="noopener">
-      Open full experience
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7V16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  <div class="side-projects-grid">
+    <a class="side-project" href="gradient-skies.html" target="_blank" rel="noopener">
+      <div class="side-project-thumb">
+        <img src="found-in-nature-thumb.png" alt="Found in Nature thumbnail" onerror="this.style.display='none'">
+        <div class="ph-label">Thumbnail — replace src="found-in-nature-thumb.png"</div>
+      </div>
+      <h3 class="side-project-title">
+        Found in Nature
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7V16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </h3>
+      <p class="side-project-desc">A gallery app for browsing gradient skies, built while getting comfortable with front-end code.</p>
     </a>
-  </div>
 
-  <div class="side-project">
-    <h3 class="side-project-title">Sketch Planner</h3>
-    <p class="side-project-desc">Speak or type a messy list of tasks and AI turns it into a hand-drawn weekly or monthly Gantt chart — a small experiment in playful, AI-assisted UI.</p>
-    <div class="side-project-frame">
-      <iframe src="sketch-planner.html" title="Sketch Planner — a side project" loading="lazy"></iframe>
-    </div>
-    <a class="side-project-link" href="sketch-planner.html" target="_blank" rel="noopener">
-      Open full experience
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7V16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <a class="side-project" href="sketch-planner.html" target="_blank" rel="noopener">
+      <div class="side-project-thumb">
+        <img src="sketch-planner-thumb.png" alt="Sketch Planner thumbnail" onerror="this.style.display='none'">
+        <div class="ph-label">Thumbnail — replace src="sketch-planner-thumb.png"</div>
+      </div>
+      <h3 class="side-project-title">
+        Sketch Planner
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7V16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </h3>
+      <p class="side-project-desc">Speak or type a messy list of tasks and AI turns it into a hand-drawn weekly or monthly Gantt chart.</p>
     </a>
   </div>
 </section>

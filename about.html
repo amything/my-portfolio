@@ -103,33 +103,14 @@
     overflow:hidden;
     background:var(--surface-2);
     border:1px solid var(--line);
+    margin-top:calc(var(--h3) * 1.15 + 1.5rem);
   }
-  .about-photo .ph-slide{
-    position:absolute; inset:0;
-    opacity:0; visibility:hidden;
-    transition:opacity 0.6s ease, visibility 0.6s;
-  }
-  .about-photo .ph-slide.active{ position:relative; opacity:1; visibility:visible; }
   .about-photo img{ width:100%; height:100%; object-fit:cover; display:block; position:relative; z-index:2; }
   .about-photo .ph-label{
     position:absolute; inset:0; z-index:1;
     display:flex; align-items:center; justify-content:center;
     color:var(--text-faint); font-size:var(--p3); text-align:center; padding:1rem;
   }
-  .about-photo .photo-arrow{
-    position:absolute; top:50%; transform:translateY(-50%);
-    width:36px; height:36px; border-radius:50%;
-    background:rgba(255,255,255,0.9);
-    border:none; cursor:pointer;
-    display:flex; align-items:center; justify-content:center;
-    color:var(--heading);
-    box-shadow:0 6px 18px rgba(29,29,29,0.14);
-    z-index:3;
-    transition:background 0.2s ease, transform 0.2s ease;
-  }
-  .about-photo .photo-arrow:hover{ background:var(--coral); color:#fff; }
-  .about-photo .photo-arrow.prev{ left:14px; }
-  .about-photo .photo-arrow.next{ right:14px; }
 
   .about-text h2{ font-size:var(--h3); margin-bottom:1.5rem; }
   .about-text p{
@@ -143,44 +124,54 @@
     padding:0 8vw 6rem;
   }
   .interests h3{ font-size:var(--h4); margin-bottom:1.8rem; }
-  .interests-wrap{ position:relative; }
-  .interests-track{
-    display:flex; gap:1.1rem;
-    overflow-x:auto;
-    scroll-behavior:smooth;
-    scroll-snap-type:x proximity;
-    padding-bottom:0.4rem;
-    -ms-overflow-style:none; scrollbar-width:none;
-  }
-  .interests-track::-webkit-scrollbar{ display:none; }
-  .interest-item{
+
+  /* ---------- Magnetic gallery (macOS-dock style hover carousel) ---------- */
+  .magnetic-carousel{
     position:relative;
-    flex:0 0 240px;
-    aspect-ratio:1/1;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:16px;
+    padding:1rem 0 1.5rem;
+  }
+  .mc-backdrop{
+    position:absolute; inset:-2rem -8vw;
+    z-index:1;
+    pointer-events:none;
+    background:rgba(250,250,250,0.0);
+    transition:background 0.3s ease;
+  }
+  .mc-backdrop.active{ pointer-events:auto; background:rgba(250,250,250,0.55); }
+
+  .mc-bar{
+    position:relative;
+    flex:none;
+    width:100px; height:340px;
     border-radius:14px;
     overflow:hidden;
     background:var(--surface-2);
     border:1px solid var(--line);
-    scroll-snap-align:start;
+    cursor:pointer;
+    z-index:2;
+    will-change:width, height;
   }
-  .interest-item img{ width:100%; height:100%; object-fit:cover; display:block; position:relative; z-index:2; }
-  .interest-item .ph-label{
+  .mc-bar.animate{
+    transition:width 0.3s ease-in-out, height 0.3s ease-in-out, filter 0.3s ease-in-out, opacity 0.3s ease-in-out;
+  }
+  .mc-bar.open{ z-index:3; }
+  .mc-bar.blurred{ filter:blur(2px); opacity:0.6; }
+
+  .mc-bar img{
+    width:100%; height:100%;
+    object-fit:cover; display:block;
+    position:relative; z-index:2;
+  }
+  .mc-bar .mc-label{
     position:absolute; inset:0; z-index:1;
     display:flex; align-items:center; justify-content:center;
     color:var(--text-faint); font-size:var(--p3); text-align:center; padding:0.6rem;
+    background:var(--surface-2);
   }
-  .interests-nav{
-    position:absolute; top:50%; right:-8px; transform:translateY(-50%);
-    width:38px; height:38px; border-radius:50%;
-    background:var(--surface);
-    border:1px solid var(--line);
-    cursor:pointer;
-    display:flex; align-items:center; justify-content:center;
-    color:var(--heading);
-    box-shadow:0 8px 20px rgba(29,29,29,0.1);
-    transition:background 0.2s ease, color 0.2s ease;
-  }
-  .interests-nav:hover{ background:var(--coral); color:#fff; border-color:var(--coral); }
 
   /* ---------- Footer (shared with homepage) ---------- */
   footer{
@@ -207,10 +198,21 @@
   @media (max-width: 860px){
     .topnav{ padding:2rem 6vw 0; }
     .about-hero{ grid-template-columns:1fr; gap:2.5rem; padding:3rem 6vw 3.5rem; }
+    .about-photo{ margin-top:0; }
     .interests{ padding:0 6vw 4rem; }
-    .interests-nav{ display:none; }
     footer{ align-items:flex-start; padding:3rem 6vw 2.5rem; }
     footer .contact-links{ align-items:flex-start; }
+
+    .magnetic-carousel{
+      justify-content:flex-start;
+      overflow-x:auto;
+      -ms-overflow-style:none; scrollbar-width:none;
+      padding:1rem 0 1rem;
+    }
+    .magnetic-carousel::-webkit-scrollbar{ display:none; }
+    .mc-bar{ width:140px !important; height:220px !important; flex:0 0 140px; }
+    .mc-bar.open{ width:80vw !important; height:80vw !important; max-width:340px !important; max-height:340px !important; }
+    .mc-backdrop{ inset:-1.5rem -6vw; }
   }
 </style>
 </head>
@@ -223,24 +225,8 @@
 
 <section class="about-hero">
   <div class="about-photo">
-    <div class="ph-slide active">
-      <img src="about-photo-1.jpg" alt="Amruta portrait 1" onerror="this.style.display='none'">
-      <div class="ph-label">Photo 1 — replace src="about-photo-1.jpg"</div>
-    </div>
-    <div class="ph-slide">
-      <img src="about-photo-2.jpg" alt="Amruta portrait 2" onerror="this.style.display='none'">
-      <div class="ph-label">Photo 2 — replace src="about-photo-2.jpg"</div>
-    </div>
-    <div class="ph-slide">
-      <img src="about-photo-3.jpg" alt="Amruta portrait 3" onerror="this.style.display='none'">
-      <div class="ph-label">Photo 3 — replace src="about-photo-3.jpg"</div>
-    </div>
-    <button class="photo-arrow prev" aria-label="Previous photo">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M15 6l-6 6 6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    </button>
-    <button class="photo-arrow next" aria-label="Next photo">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    </button>
+    <img src="amrutaj.jpg" alt="Amruta portrait" onerror="this.style.display='none'">
+    <div class="ph-label">Photo — replace src="amrutaj.jpg"</div>
   </div>
 
   <div class="about-text">
@@ -253,36 +239,32 @@
 
 <section class="interests">
   <h3>What I do when I'm not working?</h3>
-  <div class="interests-wrap">
-    <div class="interests-track" id="interestsTrack">
-      <div class="interest-item">
-        <img src="interest-1.jpg" alt="Interest 1" onerror="this.style.display='none'">
-        <div class="ph-label">1 — "interest-1.jpg"</div>
-      </div>
-      <div class="interest-item">
-        <img src="interest-2.jpg" alt="Interest 2" onerror="this.style.display='none'">
-        <div class="ph-label">2 — "interest-2.jpg"</div>
-      </div>
-      <div class="interest-item">
-        <img src="interest-3.jpg" alt="Interest 3" onerror="this.style.display='none'">
-        <div class="ph-label">3 — "interest-3.jpg"</div>
-      </div>
-      <div class="interest-item">
-        <img src="interest-4.jpg" alt="Interest 4" onerror="this.style.display='none'">
-        <div class="ph-label">4 — "interest-4.jpg"</div>
-      </div>
-      <div class="interest-item">
-        <img src="interest-5.jpg" alt="Interest 5" onerror="this.style.display='none'">
-        <div class="ph-label">5 — "interest-5.jpg"</div>
-      </div>
-      <div class="interest-item">
-        <img src="interest-6.jpg" alt="Interest 6" onerror="this.style.display='none'">
-        <div class="ph-label">6 — "interest-6.jpg"</div>
-      </div>
+  <div class="magnetic-carousel" id="magneticCarousel">
+    <div class="mc-backdrop" id="mcBackdrop"></div>
+    <div class="mc-bar" data-index="0">
+      <img src="gallery-1.jpg" alt="Gallery photo 1" onerror="this.style.display='none'">
+      <div class="mc-label">Image 1 — replace src="gallery-1.jpg"</div>
     </div>
-    <button class="interests-nav" id="interestsNext" aria-label="Scroll interests right">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    </button>
+    <div class="mc-bar" data-index="1">
+      <img src="gallery-2.jpg" alt="Gallery photo 2" onerror="this.style.display='none'">
+      <div class="mc-label">Image 2 — replace src="gallery-2.jpg"</div>
+    </div>
+    <div class="mc-bar" data-index="2">
+      <img src="gallery-3.jpg" alt="Gallery photo 3" onerror="this.style.display='none'">
+      <div class="mc-label">Image 3 — replace src="gallery-3.jpg"</div>
+    </div>
+    <div class="mc-bar" data-index="3">
+      <img src="gallery-4.jpg" alt="Gallery photo 4" onerror="this.style.display='none'">
+      <div class="mc-label">Image 4 — replace src="gallery-4.jpg"</div>
+    </div>
+    <div class="mc-bar" data-index="4">
+      <img src="gallery-5.jpg" alt="Gallery photo 5" onerror="this.style.display='none'">
+      <div class="mc-label">Image 5 — replace src="gallery-5.jpg"</div>
+    </div>
+    <div class="mc-bar" data-index="5">
+      <img src="gallery-6.jpg" alt="Gallery photo 6" onerror="this.style.display='none'">
+      <div class="mc-label">Image 6 — replace src="gallery-6.jpg"</div>
+    </div>
   </div>
 </section>
 
@@ -309,35 +291,116 @@
 </footer>
 
 <script>
-  /* ---------- About photo carousel ---------- */
-  const phSlides = Array.from(document.querySelectorAll('.ph-slide'));
-  const prevBtn = document.querySelector('.photo-arrow.prev');
-  const nextBtn = document.querySelector('.photo-arrow.next');
-  let phIndex = 0;
+  /* ---------- Magnetic gallery (macOS-dock hover magnify + click-to-open) ---------- */
+  (function(){
+    const container = document.getElementById('magneticCarousel');
+    const backdrop = document.getElementById('mcBackdrop');
+    if(!container || !backdrop) return;
 
-  function goToPhoto(i){
-    phIndex = (i + phSlides.length) % phSlides.length;
-    phSlides.forEach((s, idx) => s.classList.toggle('active', idx === phIndex));
-  }
+    const bars = Array.from(container.querySelectorAll('.mc-bar'));
+    const n = bars.length;
+    if(!n) return;
 
-  if(phSlides.length){
-    prevBtn.addEventListener('click', () => goToPhoto(phIndex - 1));
-    nextBtn.addEventListener('click', () => goToPhoto(phIndex + 1));
-  }
+    const collapsedWidth = 100, hoverWidth = 200;
+    const collapsedHeight = 340, hoverHeight = 400;
+    const openSize = 600, gap = 16, influence = 200;
 
-  /* ---------- Interests horizontal scroll ---------- */
-  const interestsTrack = document.getElementById('interestsTrack');
-  const interestsNext = document.getElementById('interestsNext');
-  if(interestsTrack && interestsNext){
-    interestsNext.addEventListener('click', () => {
-      const itemWidth = interestsTrack.querySelector('.interest-item').offsetWidth + 18;
-      const atEnd = interestsTrack.scrollLeft + interestsTrack.clientWidth >= interestsTrack.scrollWidth - 10;
-      interestsTrack.scrollTo({
-        left: atEnd ? 0 : interestsTrack.scrollLeft + itemWidth * 2,
-        behavior:'smooth'
+    let target = bars.map(() => 0);
+    let cur = bars.map(() => 0);
+    let raf = 0;
+    let openIndex = null;
+
+    const isFinePointer = window.matchMedia('(pointer: fine)').matches;
+
+    function applySizes(){
+      bars.forEach((bar, i) => {
+        let w, h;
+        if(openIndex !== null){
+          if(i === openIndex){ w = openSize; h = openSize; }
+          else { w = collapsedWidth; h = collapsedHeight; }
+        } else {
+          const f = cur[i] || 0;
+          w = collapsedWidth + (hoverWidth - collapsedWidth) * f;
+          h = collapsedHeight + (hoverHeight - collapsedHeight) * f;
+        }
+        bar.style.width = w + 'px';
+        bar.style.height = h + 'px';
+      });
+    }
+
+    function loop(){
+      let moving = false;
+      for(let i = 0; i < n; i++){
+        const d = target[i] - cur[i];
+        if(Math.abs(d) > 0.001){ cur[i] += d * 0.2; moving = true; }
+        else { cur[i] = target[i]; }
+      }
+      applySizes();
+      raf = moving ? requestAnimationFrame(loop) : 0;
+    }
+    function startLoop(){ if(!raf) raf = requestAnimationFrame(loop); }
+
+    function setTargetFromCursor(clientX){
+      const rect = container.getBoundingClientRect();
+      const cx = clientX - rect.left;
+      const totalBase = n * collapsedWidth + (n - 1) * gap;
+      const startX = (rect.width - totalBase) / 2;
+      target = bars.map((_, i) => {
+        const center = startX + i * (collapsedWidth + gap) + collapsedWidth / 2;
+        const dist = Math.abs(cx - center);
+        const f = Math.max(0, 1 - dist / influence);
+        return f * f * (3 - 2 * f); // smoothstep falloff
+      });
+      startLoop();
+    }
+
+    if(isFinePointer){
+      container.addEventListener('mousemove', (e) => {
+        if(openIndex !== null) return;
+        setTargetFromCursor(e.clientX);
+      });
+      container.addEventListener('mouseleave', () => {
+        if(openIndex !== null) return;
+        target = bars.map(() => 0);
+        startLoop();
+      });
+    }
+
+    function openBar(i){
+      openIndex = i;
+      bars.forEach((bar, idx) => {
+        bar.classList.add('animate');
+        bar.classList.toggle('open', idx === i);
+        bar.classList.toggle('blurred', idx !== i);
+      });
+      backdrop.classList.add('active');
+      applySizes();
+    }
+
+    function closeAll(){
+      openIndex = null;
+      target = bars.map(() => 0);
+      cur = bars.map(() => 0);
+      bars.forEach(bar => {
+        bar.classList.remove('open');
+        bar.classList.remove('blurred');
+      });
+      backdrop.classList.remove('active');
+      applySizes();
+      setTimeout(() => bars.forEach(bar => bar.classList.remove('animate')), 320);
+    }
+
+    bars.forEach((bar, i) => {
+      bar.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if(openIndex === i) closeAll();
+        else openBar(i);
       });
     });
-  }
+    backdrop.addEventListener('click', closeAll);
+
+    applySizes();
+  })();
 </script>
 
 </body>

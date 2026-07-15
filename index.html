@@ -335,14 +335,11 @@
     grid-template-columns: 1fr 1.15fr;
     gap:3rem;
     align-items:center;
-    opacity:0;
-    transform:translateY(28px);
     cursor:pointer;
     position:relative;
     border:1px solid transparent;
-    transition:opacity 0.7s ease, transform 0.7s ease, background-color 0.3s ease;
+    transition:background-color 0.3s ease;
   }
-  .project.visible{ opacity:1; transform:translateY(0); }
   .project:hover{
     background:var(--surface-2);
   }

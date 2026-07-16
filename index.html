@@ -205,7 +205,8 @@
 
   /* ---------- Client logos row (static on desktop, animated marquee on mobile) ---------- */
   .clients{
-    max-width:1280px;
+    width:100%;
+    max-width:none;
     margin:0 auto;
     padding: 1.5rem 8vw 1.5rem;
     border-bottom:1px solid var(--line);
@@ -216,11 +217,13 @@
   }
   .clients::-webkit-scrollbar{ display:none; }
   .clients-track{
+    width:100%;
     display:flex;
     align-items:center;
+    justify-content:space-between;
     flex-wrap:nowrap;
-    gap:2.6rem;
-    padding-right:2.6rem;
+    gap:3rem;
+    padding-right:0;
     flex-shrink:0;
     animation:none;
   }
@@ -236,9 +239,9 @@
     flex:0 0 auto;
   }
   .clients img{
-    height:100px;
+    height:122px;
     width:auto;
-    max-width:170px;
+    max-width:195px;
     object-fit:contain;
     opacity:0.75;
     filter:grayscale(100%);
@@ -255,6 +258,8 @@
       mask-image: linear-gradient(to right, transparent 0, #000 8vw, #000 92%, transparent 100%);
     }
     .clients-track{
+      width:auto;
+      justify-content:flex-start;
       gap:2.4rem;
       padding-right:2.4rem;
       animation:clients-scroll 14s linear infinite;

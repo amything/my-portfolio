@@ -84,8 +84,13 @@
     display:inline-block; font-size:13px; font-weight:600; color:var(--coral);
     text-transform:uppercase; letter-spacing:0.06em; margin-bottom:1.1rem;
   }
-  .cs-hero h1{ font-size:clamp(2rem, 4.6vw, var(--h1)); max-width:22ch; margin-bottom:1.1rem; }
+  .cs-hero h1{ font-size:clamp(1.7rem, 3.4vw, 40px); max-width:22ch; margin-bottom:0; }
   .cs-hero .subhead{ font-size:var(--p1); color:var(--body-text); max-width:58ch; }
+  .live-link{
+    display:inline-block; margin-top:1.4rem; font-size:15px; font-weight:600; color:var(--coral);
+    border-bottom:1px solid transparent;
+  }
+  .live-link:hover{ border-color:var(--coral); }
 
   .meta-grid{
     max-width:920px; margin:2.8rem auto 0; padding:0 8vw;
@@ -244,22 +249,25 @@
   <nav><a href="index.html">← Back to portfolio</a></nav>
 </div>
 
+<div class="cs-hero" style="padding-bottom:1.4rem;">
+  <h1>One Community, One Rhythm</h1>
+</div>
+
 <div class="cs-hero-image">
   <div class="frame">
     <img src="https://raw.githubusercontent.com/amything/my-portfolio/main/Dashboard_Mockup%20(1500%20x%20418%20px).png" alt="Mantra108 Kirtan page redesign">
   </div>
 </div>
 
-<div class="cs-hero">
-  <span class="tag-label">Experience Design · UI/UX · 2025</span>
-  <h1>One Community, One Rhythm</h1>
-  <p class="subhead">Long paragraphs. One-off sections. Calls to action appearing without context. I rebuilt Mantra108's Kirtan page around one clear journey — help people understand the experience, trust the people behind it, and feel ready to join.</p>
+<div class="cs-hero" style="padding-top:1.8rem;">
+  <p class="subhead">Long paragraphs. One-off sections. Calls to action appearing without context. I rebuilt Mantra108's Kirtan page around one clear journey to help people understand the experience, trust the people behind it, and feel ready to join.</p>
+  <a class="live-link" href="https://mantra108.com.au/events/kirtan.html" target="_blank" rel="noopener">View live site →</a>
 </div>
 
 <div class="meta-grid">
   <div><div class="m-label">Role</div><div class="m-val">UI/UX Designer<br>Experience redesign</div></div>
   <div><div class="m-label">Timeline</div><div class="m-val">2025<br>Phased rollout</div></div>
-  <div><div class="m-label">Team</div><div class="m-val">Design<br>Content stakeholders<br>Development</div></div>
+  <div><div class="m-label">Team</div><div class="m-val">Solo UX Designer<br>Content stakeholders<br>Developer</div></div>
   <div><div class="m-label">Platform</div><div class="m-val">Responsive web</div></div>
   <div><div class="m-label">Outcome</div><div class="m-val">Live responsive experience<br>Reusable page system</div></div>
 </div>

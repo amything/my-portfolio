@@ -51,15 +51,26 @@
   h1,h2,h3,h4{ font-family:var(--font-heading); font-weight:600; color:var(--heading); line-height:1.18; letter-spacing:0.005em; }
   ::selection{ background:var(--coral); color:#fff; }
 
-  /* ---------- Nav ---------- */
+  /* ---------- Nav (grid matches home & about pages) ---------- */
   .topnav{
     display:flex; align-items:center; justify-content:space-between;
-    max-width:920px;
+    max-width:1280px;
     margin:0 auto;
-    padding:2.5rem 8vw 0;
+    padding: 3.5rem 8vw 0;
   }
-  .logo-text{ font-family:var(--font-heading); font-size:26px; font-weight:600; color:var(--coral); }
-  .topnav nav a{ font-size:16px; font-weight:500; color:var(--heading); border-bottom:1px solid transparent; }
+  .logo-text{
+    font-family:var(--font-heading);
+    font-size:var(--h3);
+    font-weight:600;
+    color:var(--coral);
+    letter-spacing:0.01em;
+  }
+  .topnav nav a{
+    font-family:var(--font-body);
+    font-size:var(--p2); font-weight:500; color:var(--heading);
+    padding-bottom:2px; border-bottom:1px solid transparent;
+    transition:border-color 0.2s ease;
+  }
   .topnav nav a:hover{ border-color:var(--coral); color:var(--coral); }
 
   /* ---------- Hero image (opens the case study) ---------- */
@@ -242,6 +253,10 @@
   .cs-footer .back-link{ font-size:15px; font-weight:500; color:var(--heading); }
   .cs-footer .back-link:hover{ color:var(--coral); }
   .cs-footer .contact-email{ font-size:15px; font-weight:600; color:var(--coral); }
+
+  @media (max-width: 860px){
+    .topnav{ padding:2rem 6vw 0; }
+  }
 </style>
 </head>
 <body>

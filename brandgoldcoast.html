@@ -3,11 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<title>Amruta Jadhav — Story</title>
+<title>Amruta Jadhav: Story</title>
 
 <!-- ============================================================
   HOW TO EDIT THIS FILE
-  1. This is a single clean stylesheet — the earlier draft had five
+  1. This is a single clean stylesheet: the earlier draft had five
      stacked <style> blocks silently overriding each other, which
      had hidden the gallery title and every placeholder badge.
      Fixed here.
@@ -17,16 +17,16 @@
      Replace a slot <div> with <img src="…" alt="…"> or
      <video src="…" autoplay muted loop playsinline></video>.
   3. Update every href="#" and PORTFOLIO_LINK_… before sending this
-     anywhere — nav button, both "View My Portfolio" cards, the four
+     anywhere: nav button, both "View My Portfolio" cards, the four
      work-grid tiles, and the social icons.
   4. Uses system fonts, not the reference site's actual RuckSack/Lora
-     files — safer to send without a font license question. Swap in
+     files, safer to send without a font license question. Swap in
      real fonts you have rights to if you want to get closer.
   5. COPY PASS (this version): rewritten to read like Brand Gold
-     Coast's own profile pieces (e.g. their Trevor Ward story) —
+     Coast's own profile pieces (e.g. their Trevor Ward story):
      short punchy openers, real scenes and dialogue, Gold Coast
      shown through her lived experience rather than stated as
-     marketing copy. A few lines are flagged "CONFIRM" — small
+     marketing copy. A few lines are flagged "CONFIRM": small
      factual specifics (follower counts, exact years, project
      names) that read better with real numbers. Fill in or cut.
 ============================================================= -->
@@ -98,7 +98,7 @@
     min-height: 78px;
     padding: 18px max(24px, calc((100vw - 1360px) / 2));
     display: grid;
-    grid-template-columns: 1fr minmax(280px, 470px) 1fr;
+    grid-template-columns: auto 1fr;
     align-items: center;
     gap: 24px;
     background: var(--mauve);
@@ -126,48 +126,63 @@
   .hero-wrap {
     width: min(1500px, calc(100% - 48px));
     margin: 22px auto 0;
+    height: calc(100vh - 22px);
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 14px;
     align-items: start;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    transition: filter 0.6s ease, transform 0.6s ease;
   }
-  @media (max-width: 860px) { .hero-wrap { grid-template-columns: 1fr; } }
+  .hero-wrap.is-blurred {
+    filter: blur(16px) brightness(0.92);
+    transform: scale(1.015);
+  }
+  @media (max-width: 860px) {
+    .hero-wrap { grid-template-columns: 1fr; position: relative; top: auto; height: auto; }
+    .hero-wrap.is-blurred { filter: none; transform: none; }
+  }
 
   .hero-left {
-    min-height: 700px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
     border: 1px solid var(--cream-line);
     border-radius: 7px;
     background: #ffffff;
-    overflow: hidden;
+    overflow-y: auto;
+    overflow-x: hidden;
   }
   .hero-left h1 {
-    padding: 36px 30px 0;
-    font-size: clamp(3rem, 6vw, 5.2rem);
+    padding: 28px 30px 0;
+    font-size: clamp(2.6rem, 5.4vw, 5.2rem);
     line-height: 0.92;
     letter-spacing: -0.045em;
   }
   .hero-left .role {
     padding: 0 30px;
-    margin: 14px 0 30px;
+    margin: 10px 0 20px;
     font-size: clamp(0.75rem, 0.9vw, 0.9rem);
     font-weight: 700;
     letter-spacing: 0.02em;
   }
 
   .quote-box {
-    padding: 34px 30px 28px;
+    padding: 24px 30px 20px;
     border-top: 1px solid var(--cream-line);
     border-bottom: 1px solid var(--cream-line);
   }
   .quote-box p {
     font-family: var(--font-quote);
-    font-size: clamp(1.7rem, 3vw, 2.3rem);
+    font-size: clamp(1.4rem, 2.4vw, 2.3rem);
     line-height: 1.25;
     letter-spacing: -0.01em;
   }
   .quote-box cite {
     display: block;
-    margin-top: 20px;
+    margin-top: 14px;
     font-style: normal;
     font-family: var(--font);
     font-size: 0.78rem;
@@ -178,10 +193,10 @@
 
   .intro {
     display: grid;
-    gap: 22px;
-    padding: 34px 30px 40px;
-    font-size: clamp(1rem, 1.2vw, 1.1rem);
-    line-height: 1.5;
+    gap: 16px;
+    padding: 24px 30px 28px;
+    font-size: clamp(0.92rem, 1.05vw, 1.1rem);
+    line-height: 1.45;
   }
 
   .hero-right { min-width: 0; position: sticky; top: 24px; align-self: start; }
@@ -289,20 +304,29 @@
   }
 
   /* ---------- Article ---------- */
+  .article-shell {
+    position: relative;
+    z-index: 2;
+    background: var(--cream);
+    border-radius: 32px 32px 0 0;
+    box-shadow: 0 -32px 60px rgba(89, 38, 21, 0.16);
+    padding-top: 56px;
+    padding-bottom: 100px;
+  }
   .article-wrap {
-    width: min(1500px, calc(100% - 48px));
+    width: min(1800px, calc(100% - 96px));
     margin: 0 auto;
-    padding: 40px 0 100px;
     display: grid;
     grid-template-columns: minmax(300px, 380px) minmax(0, 1fr);
     gap: clamp(48px, 6vw, 100px);
     align-items: start;
   }
   @media (max-width: 980px) {
-    .article-wrap { grid-template-columns: 240px minmax(0,1fr); gap: 40px; width: calc(100% - 32px); }
+    .article-wrap { grid-template-columns: 240px minmax(0,1fr); gap: 40px; width: calc(100% - 48px); }
   }
   @media (max-width: 720px) {
-    .article-wrap { display: block; width: calc(100% - 32px); padding-top: 8px; }
+    .article-wrap { display: block; width: calc(100% - 32px); }
+    .article-shell { padding-top: 8px; }
   }
 
   .byline { position: sticky; top: 24px; }
@@ -329,7 +353,13 @@
   .article-content h2 { margin: 46px 0 18px; font-size: clamp(1.5rem, 2vw, 1.9rem); font-weight: 800; letter-spacing: -0.015em; }
   .article-content h3 { font-size: clamp(1.2rem, 1.5vw, 1.4rem); font-weight: 800; margin-bottom: 18px; }
 
-  .inline-quote { font-family: var(--font-quote); font-size: 1.08em; }
+  .article-content > p.inline-quote {
+    font-family: var(--font-quote);
+    font-size: clamp(2rem, 3.2vw, 3.4rem);
+    line-height: 1.25;
+    letter-spacing: -0.015em;
+    margin: 40px 0;
+  }
 
   .article-figure {
     position: relative;
@@ -443,13 +473,13 @@
   }
   .favourites-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
   }
   @media (max-width: 480px) { .favourites-grid { grid-template-columns: 1fr 1fr; } }
   .favourite-card {
-    min-height: 84px;
-    padding: 14px 16px;
+    min-height: 64px;
+    padding: 10px 12px;
     border: 1px solid var(--cream-line);
     border-radius: 10px;
     background: #ffffff;
@@ -460,7 +490,7 @@
   }
   .favourite-card span {
     font-weight: 800;
-    font-size: 1.02rem;
+    font-size: 0.88rem;
     letter-spacing: -0.01em;
   }
   /* Swap a .favourite-card's <span> for <img src="…" alt="…"> once you have real logos */
@@ -473,7 +503,7 @@
     list-style: none;
   }
   .highlight-list li { font-size: 1.02rem; line-height: 1.6; margin-bottom: 8px; padding-left: 18px; position: relative; }
-  .highlight-list li::before { content: "—"; position: absolute; left: 0; color: var(--coral-dark); }
+  .highlight-list li::before { content: "•"; position: absolute; left: 0; color: var(--coral-dark); }
   .highlight-list li:last-child { margin-bottom: 0; }
 
   .big-quote {
@@ -501,6 +531,20 @@
   }
   footer nav { display: flex; gap: 18px; }
 
+  /* ---------- Persistent rounded-corner frame ---------- */
+  .corner-mask {
+    position: fixed;
+    inset: 0;
+    z-index: 60;
+    pointer-events: none;
+    border-radius: 32px;
+    box-shadow: 0 0 0 9999px var(--cream);
+    opacity: 0;
+    transition: opacity 0.5s ease;
+  }
+  .corner-mask.is-visible { opacity: 1; }
+  @media (max-width: 860px) { .corner-mask { display: none; } }
+
   @media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; transition: none !important; } }
 </style>
 </head>
@@ -508,7 +552,7 @@
 
   <!-- ============ HEADER ============ -->
   <header>
-    <span class="logo">Amruta Jadhav</span>
+    <span class="logo">Designer, Gold Coast.</span>
     <span class="tagline">A speculative story page, for Brand Gold Coast</span>
   </header>
 
@@ -525,13 +569,13 @@
 
       <div class="intro">
         <p>Amruta Jadhav has a habit of asking one more question than people expect: "What does this actually need to do?" A brief might ask for a presentation. She'll ask who needs to use it, what they need to understand, and whether they'll have to rebuild it again next month. More often than not, the answer isn't just a presentation. It's a system.</p>
-        <p>Across nearly a decade in design, she's worked with advertising agencies and in-house teams, designing for brands including Toyota, JBL, Harman Kardon, Amazon, AstraZeneca, Sterling Holidays and Emma Sleep — without ever settling into one lane.</p>
+        <p>Across nearly a decade in design, she's worked with advertising agencies and in-house teams, designing for brands including Toyota, JBL, Harman Kardon, Amazon, AstraZeneca, Sterling Holidays and Emma Sleep, without ever settling into one lane.</p>
         <p><strong>This is her pitch for the in-house design role at Brand Gold Coast Pty Ltd, told the way the brand tells everyone else's story.</strong></p>
       </div>
     </div>
 
     <div class="hero-right">
-      <!-- [SLOT 1 — Hero] Full-bleed portrait or short clip, ideally you on the coast -->
+      <!-- [SLOT 1: Hero] Full-bleed portrait or short clip, ideally you on the coast -->
       <div class="hero-media">
         <img src="https://raw.githubusercontent.com/amything/my-portfolio/main/Amruta%20J.jpg" alt="Amruta Jadhav">
         <span class="badge badge-corner">⬇</span>
@@ -547,12 +591,12 @@
   </div>
 
   <!-- ============ ARTICLE BODY ============ -->
-  <article class="article-wrap">
+  <article class="article-shell">
+  <div class="article-wrap">
     <div class="byline">
       <div class="avatar-wrap">
-        <!-- [SLOT 3 — Byline photo] -->
+        <!-- [SLOT 3: Byline photo] -->
         <img class="avatar" src="https://raw.githubusercontent.com/amything/my-portfolio/main/Amruta%20J.jpg" alt="Amruta Jadhav">
-        <span class="badge badge-corner">⬇</span>
       </div>
       <div class="name-block">
         <h5>Amruta Jadhav</h5>
@@ -567,7 +611,17 @@
       <p>It matched the version of the Gold Coast she already had in her mind: beaches, events, visitors and something always happening.</p>
       <p>Living here showed her there was much more to the city.</p>
       <p>Moving somewhere new was not always a straight line. There were new train and tram routes to understand, unfamiliar places to navigate and the strange feeling of starting again somewhere that did not yet know your story.</p>
-      <p>That began to change when Amruta started working from Southport Library. Surrounded by creative people, community activity and local events, she began to see the Gold Coast differently. It was not simply a destination. It was a place where people were building businesses, ideas, communities and new versions of themselves.</p>
+      <p>That began to change when Amruta started working from Southport Library for her remote role with Mantra108. Surrounded by creative people, community activity and local events, she began to see the Gold Coast differently. It was not simply a destination, but a place where people were building businesses, sharing ideas, creating communities and shaping new versions of themselves.</p>
+
+      <div class="favourites-section">
+        <span class="favourites-label">Favourite local eateries</span>
+        <div class="favourites-grid">
+          <div class="favourite-card"><span>Ciccio's</span></div>
+          <div class="favourite-card"><span>Haveli</span></div>
+          <div class="favourite-card"><span>Day Off</span></div>
+          <div class="favourite-card"><span>Currumbin Cafe</span></div>
+        </div>
+      </div>
 
       <h2>Hard to put in one box</h2>
       <p>Across nearly a decade in design, Amruta has never settled into one narrow lane.</p>
@@ -598,7 +652,7 @@
       <p>As part of a growing startup, her role quickly expanded beyond UX and interface design. She contributed across the organisation's digital presence, campaign materials, social content, presentations and printed pieces. Mantra 108's wellness festivals saw a 20% increase in bookings, adding 500 participants, and a 45% increase in weekly participation.</p>
       <p>The team was regularly rebuilding the same kinds of materials from scratch. Every presentation, social tile or event asset became another one-off design.</p>
       <p>Rather than continuing to create individual pieces, Amruta stepped back and looked at what the team repeatedly needed.</p>
-      <p>She developed a shared visual language, reusable components and practical templates that could work across different platforms. The result was not just one polished post, brochure or presentation. It was a system the team could continue using without reinventing everything each time — as the startup started looking like an established brand.</p>
+      <p>She developed a shared visual language, reusable components and practical templates that could work across different platforms. The result was not just one polished post, brochure or presentation. It was a system the team could continue using without reinventing everything each time, as the startup started looking like an established brand.</p>
       <p>It may be less dramatic than one big creative idea, but for a small team, it makes a real difference.</p>
 
       <h2>A Gold Coaster, on and off the screen</h2>
@@ -610,15 +664,6 @@
       <figure class="article-figure">
         <img src="https://raw.githubusercontent.com/amything/my-portfolio/main/skypoint-wedding-shoot.jpg" alt="Amruta Jadhav modelling for SkyPoint's Indian wedding-themed campaign on the Gold Coast">
       </figure>
-
-      <div class="favourites-section">
-        <span class="favourites-label">Favourite local eateries</span>
-        <div class="favourites-grid">
-          <div class="favourite-card"><span>Ciccio's</span></div>
-          <div class="favourite-card"><span>Haveli</span></div>
-          <div class="favourite-card"><span>Day Off</span></div>
-        </div>
-      </div>
 
       <h2>The concept</h2>
       <span class="concept-tag">Found in Nature</span>
@@ -637,7 +682,7 @@
       <p>Each photograph becomes a unique gradient, connecting the digital system to the landscape that inspired it. Over time, photos contributed by other Gold Coasters could build an evolving colour library shaped by the people who experience the city every day.</p>
 
       <h2>How she'd work</h2>
-      <p>Amruta is comfortable taking a concept end to end — refining type and layout, building reusable Figma systems, preparing production-ready artwork, and adapting one idea across digital, social, print, presentations and physical touchpoints without losing the thread. She also knows the less glamorous side of in-house work well: five requests landing at once, feedback that needs a same-day turnaround, formats that have to stay consistent even when nobody's watching, and the general reality of a small team where everyone pitches in on things outside their job title.</p>
+      <p>Amruta is comfortable taking a concept end to end: refining type and layout, building reusable Figma systems, preparing production-ready artwork, and adapting one idea across digital, social, print, presentations and physical touchpoints without losing the thread. She also knows the less glamorous side of in-house work well: five requests landing at once, feedback that needs a same-day turnaround, formats that have to stay consistent even when nobody's watching, and the general reality of a small team where everyone pitches in on things outside their job title.</p>
       <p class="inline-quote">"I like the big idea," she says. "But I care just as much about the small details that let it survive contact with every format it eventually has to work in."</p>
 
       <figure class="article-figure">
@@ -645,7 +690,7 @@
       </figure>
 
       <p>The Gold Coast may first have sounded like "tram to party."</p>
-      <p>Now, it feels like somewhere Amruta can contribute to a much bigger story — a city known for its beaches and events, but also for its creativity, ambition, community and the people working to build what comes next.</p>
+      <p>Now, it feels like somewhere Amruta can contribute to a much bigger story: a city known for its beaches and events, but also for its creativity, ambition, community and the people working to build what comes next.</p>
 
       <div class="big-quote">
         She would love to help tell that story, as part of Team GoldCoaster.
@@ -659,6 +704,7 @@
         <a class="pill-btn" href="#">View My Portfolio</a>
       </div>
     </div>
+  </div>
   </article>
 
   <!-- ============ FOOTER ============ -->
@@ -669,6 +715,28 @@
       <a href="#">Contact</a>
     </nav>
   </footer>
+
+  <div class="corner-mask" aria-hidden="true"></div>
+
+  <script>
+    (function () {
+      var heroWrap = document.querySelector('.hero-wrap');
+      var articleShell = document.querySelector('.article-shell');
+      var cornerMask = document.querySelector('.corner-mask');
+      if (!heroWrap || !articleShell) return;
+
+      function onScroll() {
+        var top = articleShell.getBoundingClientRect().top;
+        var covered = top <= 4;
+        heroWrap.classList.toggle('is-blurred', covered);
+        if (cornerMask) cornerMask.classList.toggle('is-visible', covered);
+      }
+
+      window.addEventListener('scroll', onScroll, { passive: true });
+      window.addEventListener('resize', onScroll);
+      onScroll();
+    })();
+  </script>
 
 </body>
 </html>

@@ -103,6 +103,9 @@
     gap: 24px;
     background: var(--mauve);
     color: var(--brown);
+    position: sticky;
+    top: 0;
+    z-index: 100;
   }
   header .logo {
     justify-self: start;
@@ -126,13 +129,13 @@
   .hero-wrap {
     width: min(1500px, calc(100% - 48px));
     margin: 22px auto 0;
-    height: calc(100vh - 22px);
+    height: calc(100vh - 78px - 22px);
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 14px;
     align-items: start;
     position: sticky;
-    top: 0;
+    top: 78px;
     z-index: 1;
     transition: filter 0.6s ease, transform 0.6s ease;
   }
@@ -199,7 +202,7 @@
     line-height: 1.45;
   }
 
-  .hero-right { min-width: 0; position: sticky; top: 24px; align-self: start; }
+  .hero-right { min-width: 0; position: sticky; top: calc(78px + 24px); align-self: start; }
   @media (max-width: 860px) { .hero-right { position: relative; top: auto; } }
   .hero-media {
     position: relative;
@@ -229,6 +232,10 @@
     font-weight: 800;
     letter-spacing: -0.02em;
     max-width: 14ch;
+  }
+  .sidebar-card h4.cta-heading {
+    font-size: clamp(1.3rem, 2.6vw, 1.9rem);
+    max-width: 26ch;
   }
   .sidebar-card .socials { display: flex; gap: 8px; margin-top: 10px; }
   .social-dot {
@@ -329,7 +336,7 @@
     .article-shell { padding-top: 8px; }
   }
 
-  .byline { position: sticky; top: 24px; }
+  .byline { position: sticky; top: calc(78px + 24px); }
   @media (max-width: 720px) {
     .byline { position: relative; top: auto; display: grid; grid-template-columns: 100px 1fr; gap: 14px; align-items: center; margin-bottom: 28px; }
   }
@@ -531,19 +538,25 @@
   }
   footer nav { display: flex; gap: 18px; }
 
-  /* ---------- Persistent rounded-corner frame ---------- */
-  .corner-mask {
+  /* ---------- Persistent rounded card lip ---------- */
+  /* Sits fixed just under the header and overlaps its bottom edge slightly,
+     giving the illusion the rounded card corner tucks into the header,
+     without ever touching the header element's own box/shape. */
+  .card-lip {
     position: fixed;
-    inset: 0;
-    z-index: 60;
+    left: 0;
+    right: 0;
+    top: calc(78px - 10px);
+    height: 40px;
+    z-index: 110;
+    background: var(--cream);
+    border-radius: 32px 32px 0 0;
     pointer-events: none;
-    border-radius: 32px;
-    box-shadow: 0 0 0 9999px var(--cream);
     opacity: 0;
     transition: opacity 0.5s ease;
   }
-  .corner-mask.is-visible { opacity: 1; }
-  @media (max-width: 860px) { .corner-mask { display: none; } }
+  .card-lip.is-visible { opacity: 1; }
+  @media (max-width: 860px) { .card-lip { display: none; } }
 
   @media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; transition: none !important; } }
 </style>
@@ -611,7 +624,7 @@
       <p>It matched the version of the Gold Coast she already had in her mind: beaches, events, visitors and something always happening.</p>
       <p>Living here showed her there was much more to the city.</p>
       <p>Moving somewhere new was not always a straight line. There were new train and tram routes to understand, unfamiliar places to navigate and the strange feeling of starting again somewhere that did not yet know your story.</p>
-      <p>That began to change when Amruta started working from Southport Library for her remote role with Mantra108. Surrounded by creative people, community activity and local events, she began to see the Gold Coast differently. It was not simply a destination, but a place where people were building businesses, sharing ideas, creating communities and shaping new versions of themselves.</p>
+      <p>That began to change when Amruta started working from Southport Library. Surrounded by creative people, community activity and local events, she began to see the Gold Coast differently. It was not simply a destination. It was a place where people were building businesses, ideas, communities and new versions of themselves.</p>
 
       <div class="favourites-section">
         <span class="favourites-label">Favourite local eateries</span>
@@ -693,15 +706,14 @@
       <p>Now, it feels like somewhere Amruta can contribute to a much bigger story: a city known for its beaches and events, but also for its creativity, ambition, community and the people working to build what comes next.</p>
 
       <div class="big-quote">
-        She would love to help tell that story, as part of Team GoldCoaster.
-        <cite>Amruta Jadhav</cite>
+        Thank you for reading. I look forward to meeting you.
       </div>
 
       <div class="sidebar-card">
         <div>
-          <h4>Discover the Work</h4>
+          <h4 class="cta-heading">Let's tell the next Gold Coaster's story together.</h4>
         </div>
-        <a class="pill-btn" href="#">View My Portfolio</a>
+        <a class="pill-btn" href="mailto:amruta.inbox@gmail.com">Send email</a>
       </div>
     </div>
   </div>
@@ -716,20 +728,20 @@
     </nav>
   </footer>
 
-  <div class="corner-mask" aria-hidden="true"></div>
+  <div class="card-lip" aria-hidden="true"></div>
 
   <script>
     (function () {
       var heroWrap = document.querySelector('.hero-wrap');
       var articleShell = document.querySelector('.article-shell');
-      var cornerMask = document.querySelector('.corner-mask');
+      var cardLip = document.querySelector('.card-lip');
       if (!heroWrap || !articleShell) return;
 
       function onScroll() {
         var top = articleShell.getBoundingClientRect().top;
         var covered = top <= 4;
         heroWrap.classList.toggle('is-blurred', covered);
-        if (cornerMask) cornerMask.classList.toggle('is-visible', covered);
+        if (cardLip) cardLip.classList.toggle('is-visible', covered);
       }
 
       window.addEventListener('scroll', onScroll, { passive: true });

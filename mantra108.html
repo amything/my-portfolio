@@ -30,7 +30,6 @@
     --h1: 56px; --h2: 42px; --h3: 30px; --h4: 24px; --h5: 18px;
     --p1: 22px; --p2: 16px; --p3: 14px;
 
-    /* Mantra108's own brand palette — used for content-specific diagrams only */
     --m-purple: #5B3E96;
     --m-purple-dim: rgba(91,62,150,0.10);
     --m-lavender: #EDE7F6;
@@ -44,14 +43,12 @@
     background:var(--bg); color:var(--body-text);
     font-family:var(--font-body); font-size:var(--p2); line-height:1.6;
     -webkit-font-smoothing:antialiased;
-    cursor: url('coffee-cursor.svg') 4 12, auto;
   }
-  a, button{ cursor: url('coffee-cursor.svg') 4 12, pointer; }
   a{ color:inherit; text-decoration:none; }
   h1,h2,h3,h4{ font-family:var(--font-heading); font-weight:600; color:var(--heading); line-height:1.18; letter-spacing:0.005em; }
   ::selection{ background:var(--coral); color:#fff; }
 
-  /* ---------- Nav (grid matches home & about pages) ---------- */
+  /* ---------- Nav ---------- */
   .topnav{
     display:flex; align-items:center; justify-content:space-between;
     max-width:1280px;
@@ -73,7 +70,7 @@
   }
   .topnav nav a:hover{ border-color:var(--coral); color:var(--coral); }
 
-  /* ---------- Hero image (opens the case study) ---------- */
+  /* ---------- Hero image ---------- */
   .cs-hero-image{
     max-width:1500px; margin:2.8rem auto 0; padding:0 4vw;
   }
@@ -256,6 +253,7 @@
 
   @media (max-width: 860px){
     .topnav{ padding:2rem 6vw 0; }
+    .meta-grid{ grid-template-columns:repeat(2,1fr); }
   }
 </style>
 </head>
@@ -263,22 +261,23 @@
 
 <div class="topnav">
   <a class="logo-text" href="index.html">Amruta J</a>
-  <nav><a href="https://www.amrutajadhav.com/psp-dashboard.html">Next project →</a></nav>
+  <nav><a href="https://www.amrutajadhav.com/psp-dashboard.html">Next project &rarr;</a></nav>
 </div>
 
 <div class="cs-hero" style="padding-bottom:1.4rem;">
   <h1>One Community, One Rhythm</h1>
 </div>
 
+<!-- HERO IMAGE: replaced with Mantra108_Mockup (1500 x 418 px).png -->
 <div class="cs-hero-image">
   <div class="frame">
-    <img src="https://raw.githubusercontent.com/amything/my-portfolio/main/Dashboard_Mockup%20(1500%20x%20418%20px).png" alt="Mantra108 Kirtan page redesign">
+    <img src="mantra108-hero.png" alt="Mantra108 Kirtan page redesign">
   </div>
 </div>
 
 <div class="cs-hero" style="padding-top:1.8rem;">
   <p class="subhead">Long paragraphs. One-off sections. Calls to action appearing without context. I rebuilt Mantra108's Kirtan page around one clear journey to help people understand the experience, trust the people behind it, and feel ready to join.</p>
-  <a class="live-link" href="https://mantra108.com.au/events/kirtan.html" target="_blank" rel="noopener">View live site →</a>
+  <a class="live-link" href="https://mantra108.com.au/events/kirtan.html" target="_blank" rel="noopener">View live site &rarr;</a>
 </div>
 
 <div class="meta-grid">
@@ -291,24 +290,24 @@
 
 <div class="hero-visual">
   <div class="anatomy-mock">
-    <div class="anatomy-row emph"><span class="a-num">01</span><span class="a-label">Promise — Feel Lighter</span></div>
-    <div class="anatomy-row"><span class="a-num">02</span><span class="a-label">Benefits — Why People Keep Coming Back</span></div>
-    <div class="anatomy-row"><span class="a-num">03</span><span class="a-label">Explanation — What Even Is Kirtan?</span></div>
-    <div class="anatomy-row"><span class="a-num">04</span><span class="a-label">Reassurance — Why Kirtan Hits Different</span></div>
-    <div class="anatomy-row"><span class="a-num">05</span><span class="a-label">Experience — What to Expect</span></div>
-    <div class="anatomy-row"><span class="a-num">06</span><span class="a-label">Proof — What People Are Saying</span></div>
-    <div class="anatomy-row"><span class="a-num">07</span><span class="a-label">People — Who's Behind This</span></div>
-    <div class="anatomy-row"><span class="a-num">08</span><span class="a-label">Belonging — Want to Join the Crew?</span></div>
-    <div class="anatomy-row"><span class="a-num">09</span><span class="a-label">Context — Kirtan History</span></div>
-    <div class="anatomy-row emph"><span class="a-num">10</span><span class="a-label">Action — When &amp; Where</span></div>
+    <div class="anatomy-row emph"><span class="a-num">01</span><span class="a-label">Promise &mdash; Feel Lighter</span></div>
+    <div class="anatomy-row"><span class="a-num">02</span><span class="a-label">Benefits &mdash; Why People Keep Coming Back</span></div>
+    <div class="anatomy-row"><span class="a-num">03</span><span class="a-label">Explanation &mdash; What Even Is Kirtan?</span></div>
+    <div class="anatomy-row"><span class="a-num">04</span><span class="a-label">Reassurance &mdash; Why Kirtan Hits Different</span></div>
+    <div class="anatomy-row"><span class="a-num">05</span><span class="a-label">Experience &mdash; What to Expect</span></div>
+    <div class="anatomy-row"><span class="a-num">06</span><span class="a-label">Proof &mdash; What People Are Saying</span></div>
+    <div class="anatomy-row"><span class="a-num">07</span><span class="a-label">People &mdash; Who's Behind This</span></div>
+    <div class="anatomy-row"><span class="a-num">08</span><span class="a-label">Belonging &mdash; Want to Join the Crew?</span></div>
+    <div class="anatomy-row"><span class="a-num">09</span><span class="a-label">Context &mdash; Kirtan History</span></div>
+    <div class="anatomy-row emph"><span class="a-num">10</span><span class="a-label">Action &mdash; When &amp; Where</span></div>
   </div>
-  <p class="visual-caption">One clear journey replaced a page built section by section — from first curiosity to registration.</p>
+  <p class="visual-caption">One clear journey replaced a page built section by section &mdash; from first curiosity to registration.</p>
 </div>
 
 <section class="cs-block">
   <span class="kicker">Overview</span>
-  <p>Mantra108 creates community experiences around music, meditation and human connection. Kirtan is one of its central offerings — a participatory experience combining live music, mantra and shared energy.</p>
-  <p><b style="color:var(--heading);">Problem</b> — An information-heavy event page explained Kirtan in detail but did not help first-time visitors understand what attending would feel like.</p>
+  <p>Mantra108 creates community experiences around music, meditation and human connection. Kirtan is one of its central offerings &mdash; a participatory experience combining live music, mantra and shared energy.</p>
+  <p><b style="color:var(--heading);">Problem</b> &mdash; An information-heavy event page explained Kirtan in detail but did not help first-time visitors understand what attending would feel like.</p>
 </section>
 
 <hr class="divider">
@@ -319,8 +318,8 @@
   <p>The original Kirtan page had grown section by section. It included the event description, benefits, Kirtan history, imagery, a testimonial and registration details. Technically, almost everything a visitor needed was there.</p>
   <p>But the experience did not form a clear story. A first-time visitor was asked to book before understanding what Kirtan was. Benefits were hidden inside paragraphs. History appeared before the contemporary experience had been established. Images documented the community but did not explain what attending would actually feel like.</p>
   <p class="pull">The page could describe Kirtan. It could not help someone imagine being there.</p>
-  <p>This was not simply a visual-polish problem — it was a comprehension, trust and sequencing problem. So I didn't begin by restyling individual sections. I began with the experience model: what should someone understand, feel and believe before being asked to register?</p>
-  <p>That led to one consistent journey: <b style="color:var(--heading);">Promise → Benefits → Explanation → Experience → Proof → People → Community → Context → Action.</b></p>
+  <p>This was not simply a visual-polish problem &mdash; it was a comprehension, trust and sequencing problem. So I didn't begin by restyling individual sections. I began with the experience model: what should someone understand, feel and believe before being asked to register?</p>
+  <p>That led to one consistent journey: <b style="color:var(--heading);">Promise &rarr; Benefits &rarr; Explanation &rarr; Experience &rarr; Proof &rarr; People &rarr; Community &rarr; Context &rarr; Action.</b></p>
   <p>The redesign visitors see is the surface. The system underneath is what keeps the experience clear.</p>
 </section>
 
@@ -329,7 +328,7 @@
 <section class="cs-block">
   <span class="kicker">The System</span>
   <h2>A framework, not a page makeover</h2>
-  <p>The fastest option would have been to update the hero, shorten a few paragraphs and modernise the interface. That would have improved the page visually, but the underlying problems would have remained. Instead, I established a reusable event experience system built around four layers — the Kirtan page became the first full expression of it.</p>
+  <p>The fastest option would have been to update the hero, shorten a few paragraphs and modernise the interface. That would have improved the page visually, but the underlying problems would have remained. Instead, I established a reusable event experience system built around four layers &mdash; the Kirtan page became the first full expression of it.</p>
   <div class="layer-grid">
     <div class="layer-card"><div class="n">01</div><div class="t">Foundations</div><div class="d">Colour, typography, spacing, imagery and interaction roles.</div></div>
     <div class="layer-card"><div class="n">02</div><div class="t">Components</div><div class="d">Reusable interface elements with defined purposes.</div></div>
@@ -341,16 +340,16 @@
 <hr class="divider">
 
 <section class="cs-block">
-  <span class="kicker">01 · Colour</span>
+  <span class="kicker">01 &middot; Colour</span>
   <h2>Colour was given a role, not just a place</h2>
-  <p><b style="color:var(--heading);">Before</b> — purple appeared across the page, but it didn't always communicate hierarchy. Pale backgrounds, buttons, decorative shapes and content sections competed without clearly defined roles.</p>
-  <p><b style="color:var(--heading);">After</b> — the palette was organised around specific responsibilities:</p>
+  <p><b style="color:var(--heading);">Before</b> &mdash; purple appeared across the page, but it didn't always communicate hierarchy. Pale backgrounds, buttons, decorative shapes and content sections competed without clearly defined roles.</p>
+  <p><b style="color:var(--heading);">After</b> &mdash; the palette was organised around specific responsibilities:</p>
   <div class="swatch-row">
-    <div class="swatch"><div class="chip" style="background:var(--m-purple);"></div><div class="label">Deep purple — brand &amp; primary actions</div></div>
-    <div class="swatch"><div class="chip" style="background:var(--m-lavender);"></div><div class="label">Soft lavender — page surfaces</div></div>
-    <div class="swatch"><div class="chip" style="background:var(--m-pink);"></div><div class="label">Pink accent — energy &amp; movement</div></div>
-    <div class="swatch"><div class="chip" style="background:#FFFFFF; border-right:1px solid var(--line);"></div><div class="label">White — cards &amp; profiles</div></div>
-    <div class="swatch"><div class="chip" style="background:var(--m-dark);"></div><div class="label">Dark neutral — long-form text</div></div>
+    <div class="swatch"><div class="chip" style="background:var(--m-purple);"></div><div class="label">Deep purple &mdash; brand &amp; primary actions</div></div>
+    <div class="swatch"><div class="chip" style="background:var(--m-lavender);"></div><div class="label">Soft lavender &mdash; page surfaces</div></div>
+    <div class="swatch"><div class="chip" style="background:var(--m-pink);"></div><div class="label">Pink accent &mdash; energy &amp; movement</div></div>
+    <div class="swatch"><div class="chip" style="background:#FFFFFF; border-right:1px solid var(--line);"></div><div class="label">White &mdash; cards &amp; profiles</div></div>
+    <div class="swatch"><div class="chip" style="background:var(--m-dark);"></div><div class="label">Dark neutral &mdash; long-form text</div></div>
   </div>
   <p style="margin-top:1.4rem;">The deeper purple guides action. Lavender creates breathing room. Pink carries the expressive energy of the community without overwhelming the page.</p>
 </section>
@@ -358,13 +357,13 @@
 <hr class="divider">
 
 <section class="cs-block">
-  <span class="kicker">02 · Typography</span>
+  <span class="kicker">02 &middot; Typography</span>
   <h2>A hierarchy built for scanning, then reading deeper</h2>
-  <p><b style="color:var(--heading);">Before</b> — the page relied heavily on small paragraphs and similar text treatments; headings separated sections, but the overall hierarchy didn't make the long page easy to scan.</p>
-  <p><b style="color:var(--heading);">After</b> — a defined hierarchy lets visitors scan the headline, understand the supporting message, then read deeper when interested:</p>
+  <p><b style="color:var(--heading);">Before</b> &mdash; the page relied heavily on small paragraphs and similar text treatments; headings separated sections, but the overall hierarchy didn't make the long page easy to scan.</p>
+  <p><b style="color:var(--heading);">After</b> &mdash; a defined hierarchy lets visitors scan the headline, understand the supporting message, then read deeper when interested:</p>
   <div class="type-scale">
     <div class="t-row"><div class="t-sample" style="font-size:28px; font-weight:600;">Feel Lighter</div><div class="t-desc">Emotional hero statement</div></div>
-    <div class="t-row"><div class="t-sample" style="font-size:20px; font-weight:600;">Wait… What Even Is Kirtan?</div><div class="t-desc">Conversational subheading</div></div>
+    <div class="t-row"><div class="t-sample" style="font-size:20px; font-weight:600;">Wait&hellip; What Even Is Kirtan?</div><div class="t-desc">Conversational subheading</div></div>
     <div class="t-row"><div class="t-sample" style="font-size:15px; font-weight:500; color:var(--body-text); font-family:var(--font-body);">Supporting body copy explaining the experience</div><div class="t-desc">Supporting body text</div></div>
     <div class="t-row"><div class="t-sample" style="font-size:13px; font-weight:500; color:var(--text-faint); font-family:var(--font-body);">Event details &amp; metadata</div><div class="t-desc">Practical information</div></div>
   </div>
@@ -373,18 +372,18 @@
 <hr class="divider">
 
 <section class="cs-block">
-  <span class="kicker">03 · Spacing &amp; Layout</span>
+  <span class="kicker">03 &middot; Spacing &amp; Layout</span>
   <h2>A deliberate pace, not one long wall of content</h2>
-  <p><b style="color:var(--heading);">Before</b> — sections had different visual densities; long paragraphs, isolated images and large galleries created an uneven reading pace.</p>
-  <p><b style="color:var(--heading);">After</b> — a consistent section rhythm using shared content widths, repeatable vertical spacing, defined card padding and consistent image proportions. The page now alternates between concise information, strong imagery and human proof.</p>
+  <p><b style="color:var(--heading);">Before</b> &mdash; sections had different visual densities; long paragraphs, isolated images and large galleries created an uneven reading pace.</p>
+  <p><b style="color:var(--heading);">After</b> &mdash; a consistent section rhythm using shared content widths, repeatable vertical spacing, defined card padding and consistent image proportions. The page now alternates between concise information, strong imagery and human proof.</p>
 </section>
 
 <hr class="divider">
 
 <section class="cs-block">
-  <span class="kicker">04 · Imagery</span>
+  <span class="kicker">04 &middot; Imagery</span>
   <h2>Photography given a job, not just a place</h2>
-  <p><b style="color:var(--heading);">Before</b> — real moments, but images varied significantly in scale, placement and purpose. <b style="color:var(--heading);">After</b> — each image type was given a defined role:</p>
+  <p><b style="color:var(--heading);">Before</b> &mdash; real moments, but images varied significantly in scale, placement and purpose. <b style="color:var(--heading);">After</b> &mdash; each image type was given a defined role:</p>
   <div class="img-role-grid">
     <div class="img-role"><div class="role-box"><svg viewBox="0 0 24 24" fill="none"><path d="M4 17l5-6 4 5 3-4 4 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><rect x="3" y="4" width="18" height="16" rx="2" stroke="currentColor" stroke-width="1.8"/></svg></div><div class="role-name">Hero</div></div>
     <div class="img-role"><div class="role-box"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="3" stroke="currentColor" stroke-width="1.8"/><path d="M5 20c1.5-4 5-5 7-5s5.5 1 7 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></div><div class="role-name">Experience</div></div>
@@ -400,7 +399,7 @@
 <section class="cs-block">
   <span class="kicker">Content as part of the system</span>
   <h2>One voice across every section</h2>
-  <p>The visual inconsistency was only one part of the problem. The original experience shifted between spiritual language, formal explanation, event promotion and transactional booking copy — which could make the page harder to interpret for someone unfamiliar with Kirtan. The redesigned voice follows four principles:</p>
+  <p>The visual inconsistency was only one part of the problem. The original experience shifted between spiritual language, formal explanation, event promotion and transactional booking copy. The redesigned voice follows four principles:</p>
   <div class="voice-grid">
     <div class="voice-card">
       <div class="v-tag">Direct</div>
@@ -410,7 +409,7 @@
     <div class="voice-card">
       <div class="v-tag">Conversational</div>
       <p style="margin-bottom:0;">Use headings that reflect the questions a visitor may already be thinking.</p>
-      <div class="v-example">"Wait… What Even Is Kirtan?"</div>
+      <div class="v-example">"Wait&hellip; What Even Is Kirtan?"</div>
     </div>
     <div class="voice-card">
       <div class="v-tag">Reassuring</div>
@@ -419,10 +418,10 @@
     </div>
     <div class="voice-card">
       <div class="v-tag">Human</div>
-      <p style="margin-bottom:0;">Describe the experience through feelings, people and real participation — not only spiritual terminology.</p>
+      <p style="margin-bottom:0;">Describe the experience through feelings, people and real participation &mdash; not only spiritual terminology.</p>
     </div>
   </div>
-  <p style="margin-top:1.4rem;">This shared voice became part of the design system because the experience wouldn't remain consistent through components alone — a reusable card with inconsistent language would still create an inconsistent product.</p>
+  <p style="margin-top:1.4rem;">This shared voice became part of the design system because the experience wouldn't remain consistent through components alone &mdash; a reusable card with inconsistent language would still create an inconsistent product.</p>
 </section>
 
 <hr class="divider">
@@ -430,15 +429,15 @@
 <section class="cs-block">
   <span class="kicker">Component System</span>
   <h2>Every module has one job</h2>
-  <p>The page was rebuilt from a collection of independent sections into a family of reusable modules — each answering a specific visitor question.</p>
+  <p>The page was rebuilt from a collection of independent sections into a family of reusable modules &mdash; each answering a specific visitor question.</p>
   <div class="module-grid">
     <div class="module-card"><div class="mod-head"><span class="mod-num">1</span><span class="mod-title">Hero</span></div><div class="mod-q">"Why should I care?"</div><div class="mod-purpose">Creates emotional relevance through a short promise, plain-language explanation, authentic imagery and a primary action.</div></div>
     <div class="module-card"><div class="mod-head"><span class="mod-num">2</span><span class="mod-title">Benefit cards</span></div><div class="mod-q">"What will I get from this?"</div><div class="mod-purpose">Turns long explanations into concise, scannable reasons to attend.</div></div>
-    <div class="module-card"><div class="mod-head"><span class="mod-num">3</span><span class="mod-title">Story split</span></div><div class="mod-q">"What exactly is this?"</div><div class="mod-purpose">Explains an unfamiliar idea with one strong image and a conversational heading — no academic description.</div></div>
+    <div class="module-card"><div class="mod-head"><span class="mod-num">3</span><span class="mod-title">Story split</span></div><div class="mod-q">"What exactly is this?"</div><div class="mod-purpose">Explains an unfamiliar idea with one strong image and a conversational heading &mdash; no academic description.</div></div>
     <div class="module-card"><div class="mod-head"><span class="mod-num">4</span><span class="mod-title">Experience cards</span></div><div class="mod-q">"Will I feel comfortable there?"</div><div class="mod-purpose">Turns concerns into reassurance by pairing an authentic image with one clear message.</div></div>
     <div class="module-card"><div class="mod-head"><span class="mod-num">5</span><span class="mod-title">Media feature</span></div><div class="mod-q">"What does it actually feel like?"</div><div class="mod-purpose">Gives atmosphere priority through video, since music and movement are better understood through experience.</div></div>
     <div class="module-card"><div class="mod-head"><span class="mod-num">6</span><span class="mod-title">Testimonial system</span></div><div class="mod-q">"Did other people enjoy it?"</div><div class="mod-purpose">Builds trust through multiple attendee stories in one consistent, carousel-navigable format.</div></div>
-    <div class="module-card"><div class="mod-head"><span class="mod-num">7</span><span class="mod-title">People cards</span></div><div class="mod-q">"Who is behind this experience?"</div><div class="mod-purpose">Gives every team member equal visual treatment — portrait, name, role and a short contribution statement.</div></div>
+    <div class="module-card"><div class="mod-head"><span class="mod-num">7</span><span class="mod-title">People cards</span></div><div class="mod-q">"Who is behind this experience?"</div><div class="mod-purpose">Gives every team member equal visual treatment &mdash; portrait, name, role and a short contribution statement.</div></div>
     <div class="module-card"><div class="mod-head"><span class="mod-num">8</span><span class="mod-title">Community callout</span></div><div class="mod-q">"Can I become more involved?"</div><div class="mod-purpose">Introduces volunteering as a separate but connected pathway from ticket registration.</div></div>
     <div class="module-card"><div class="mod-head"><span class="mod-num">9</span><span class="mod-title">Context block</span></div><div class="mod-q">"Where does this experience come from?"</div><div class="mod-purpose">Preserves cultural and historical meaning, placed deliberately after the experience is understood.</div></div>
     <div class="module-card"><div class="mod-head"><span class="mod-num">10</span><span class="mod-title">Event details</span></div><div class="mod-q">"When, where and how do I join?"</div><div class="mod-purpose">Consolidates schedule, location, image and registration into one predictable destination.</div></div>
@@ -450,7 +449,7 @@
 <section class="cs-block">
   <span class="kicker">Deep Dive</span>
   <h2>The event storytelling pattern</h2>
-  <p>The most important system decision wasn't an individual button or card — it was the order in which the modules appear. Each part of the page prepares the visitor for the next one.</p>
+  <p>The most important system decision wasn't an individual button or card &mdash; it was the order in which the modules appear. Each part of the page prepares the visitor for the next one.</p>
   <div class="journey-list">
     <div class="journey-step"><div class="j-dot">01</div><div class="j-title">Promise</div><div class="j-heading">Feel Lighter</div><div class="j-desc">Create an emotional reason to continue.</div></div>
     <div class="journey-step"><div class="j-dot">02</div><div class="j-title">Benefits</div><div class="j-heading">Why People Keep Coming Back</div><div class="j-desc">Make the value understandable within seconds.</div></div>
@@ -463,7 +462,7 @@
     <div class="journey-step"><div class="j-dot">09</div><div class="j-title">Context</div><div class="j-heading">Kirtan History</div><div class="j-desc">Provide cultural meaning after contemporary relevance is established.</div></div>
     <div class="journey-step"><div class="j-dot">10</div><div class="j-title">Action</div><div class="j-heading">When &amp; Where</div><div class="j-desc">Bring the journey to a clear next step.</div></div>
   </div>
-  <p style="margin-top:1.6rem;">The content can change from one event to another. The decision logic remains consistent — that's what makes it a system rather than a fixed landing-page template.</p>
+  <p style="margin-top:1.6rem;">The content can change from one event to another. The decision logic remains consistent &mdash; that's what makes it a system rather than a fixed landing-page template.</p>
 </section>
 
 <hr class="divider">
@@ -503,14 +502,14 @@
 
 <section class="cs-block">
   <span class="kicker">Outcome</span>
-  <p>The redesign created more than a refreshed Kirtan page — it established a reusable foundation for how Mantra108 can introduce experiences online.</p>
+  <p>The redesign created more than a refreshed Kirtan page &mdash; it established a reusable foundation for how Mantra108 can introduce experiences online.</p>
   <div class="outcome-grid">
     <div class="outcome-tile"><div class="o-text">One visual hierarchy across colour, type and imagery</div></div>
     <div class="outcome-tile"><div class="o-text">One conversational voice across every section</div></div>
     <div class="outcome-tile"><div class="o-text">One modular component family, ready to reuse</div></div>
     <div class="outcome-tile"><div class="o-text">One responsive framework for future event pages</div></div>
   </div>
-  <p style="margin-top:1.6rem;">Visitors can now understand what Kirtan is, see what attending looks like, meet the community and find practical information — without navigating a dense or fragmented experience. The redesigned experience created a clearer path from first-time discovery to event registration, and established a reusable framework for future Mantra108 event pages.</p>
+  <p style="margin-top:1.6rem;">Visitors can now understand what Kirtan is, see what attending looks like, meet the community and find practical information &mdash; without navigating a dense or fragmented experience. The redesigned experience created a clearer path from first-time discovery to event registration, and established a reusable framework for future Mantra108 event pages.</p>
 </section>
 
 <div class="pull" style="max-width:920px; margin:0 auto; padding:1rem 8vw 4.2rem;">
@@ -518,8 +517,9 @@
 </div>
 
 <footer class="cs-footer">
-  <a class="back-link" href="https://www.amrutajadhav.com/psp-dashboard.html">Next project →</a>
-  <a class="contact-email" href="mailto:amruta.inbox@gmail.com">amruta.inbox@gmail.com</a>
+  <a class="back-link" href="https://www.amrutajadhav.com/psp-dashboard.html">Next project &rarr;</a>
+  <a class="contact-email" href="mailto:amrutakj.inbox@gmail.com">amrutakj.inbox@gmail.com</a>
 </footer>
+
 </body>
 </html>

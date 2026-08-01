@@ -219,7 +219,7 @@ Curious about how things work and why they matter.</title>
   .clients{
     max-width:1280px;
     margin:0 auto;
-    padding: 1.5rem 8vw 1.5rem;
+    padding: 2.4rem 8vw 2.4rem;
     border-bottom:1px solid var(--line);
     overflow-x:auto;
     -webkit-overflow-scrolling:touch;
@@ -230,9 +230,10 @@ Curious about how things work and why they matter.</title>
   .clients-track{
     display:flex;
     align-items:center;
+    justify-content:space-between;
     flex-wrap:nowrap;
+    width:100%;
     gap:2.6rem;
-    padding-right:2.6rem;
     flex-shrink:0;
     animation:none;
   }
@@ -248,9 +249,9 @@ Curious about how things work and why they matter.</title>
     flex:0 0 auto;
   }
   .clients img{
-    height:100px;
+    height:92px;
     width:auto;
-    max-width:170px;
+    max-width:240px;
     object-fit:contain;
     opacity:0.75;
     filter:grayscale(100%);
@@ -258,6 +259,10 @@ Curious about how things work and why they matter.</title>
     flex-shrink:0;
   }
   .clients img:hover{ opacity:1; filter:grayscale(0%); }
+  .clients img.logo-boost{
+    height:118px;
+    max-width:290px;
+  }
 
   @media (max-width: 860px){
     .clients{
@@ -267,6 +272,8 @@ Curious about how things work and why they matter.</title>
       mask-image: linear-gradient(to right, transparent 0, #000 8vw, #000 92%, transparent 100%);
     }
     .clients-track{
+      justify-content:flex-start;
+      width:max-content;
       gap:2.4rem;
       padding-right:2.4rem;
       animation:clients-scroll 14s linear infinite;
@@ -277,6 +284,10 @@ Curious about how things work and why they matter.</title>
       height:44px;
       width:auto;
       max-width:85px;
+    }
+    .clients img.logo-boost{
+      height:56px;
+      max-width:105px;
     }
   }
 
@@ -649,17 +660,17 @@ Curious about how things work and why they matter.</title>
     <div class="client-card"><img src="Emma-Sleep.png" alt="Emma Sleep"></div>
     <div class="client-card"><img src="amazon.png" alt="Amazon"></div>
     <div class="client-card"><img src="Safari.png" alt="Safari"></div>
-    <div class="client-card"><img src="AstraZenca.png" alt="AstraZeneca"></div>
+    <div class="client-card"><img src="AstraZenca.png" alt="AstraZeneca" class="logo-boost"></div>
     <div class="client-card"><img src="jbl.png" alt="JBL"></div>
-    <div class="client-card"><img src="Harman-Kardon-logo.png" alt="Harman Kardon"></div>
+    <div class="client-card"><img src="Harman-Kardon-logo.png" alt="Harman Kardon" class="logo-boost"></div>
   </div>
   <div class="clients-track" aria-hidden="true">
     <div class="client-card"><img src="Emma-Sleep.png" alt="" aria-hidden="true"></div>
     <div class="client-card"><img src="amazon.png" alt="" aria-hidden="true"></div>
     <div class="client-card"><img src="Safari.png" alt="" aria-hidden="true"></div>
-    <div class="client-card"><img src="AstraZenca.png" alt="" aria-hidden="true"></div>
+    <div class="client-card"><img src="AstraZenca.png" alt="" aria-hidden="true" class="logo-boost"></div>
     <div class="client-card"><img src="jbl.png" alt="" aria-hidden="true"></div>
-    <div class="client-card"><img src="Harman-Kardon-logo.png" alt="" aria-hidden="true"></div>
+    <div class="client-card"><img src="Harman-Kardon-logo.png" alt="" aria-hidden="true" class="logo-boost"></div>
   </div>
 </div>
 

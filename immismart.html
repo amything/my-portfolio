@@ -10,7 +10,7 @@
 <style>
   :root{
     --blue:#3D5AFE; --blue-2:#6C8CFF; --blue-deep:#0D1233;
-    --tint:#EAF0FF; --coral:#FF6B54;
+    --tint:#EAF0FF; --coral:#FF6B54; --brand:#FF5C4D;
     --ink:#12142B; --gray:#666B85; --gray-soft:#9A9EB8; --line:#E4E7F5;
     --white:#FFFFFF; --off:#FAFBFF;
     --display:'Bricolage Grotesque', sans-serif; --body:'Inter', sans-serif; --mono:'JetBrains Mono', monospace;
@@ -76,7 +76,35 @@
   .closing p{color:#D6DCFF; margin:0; font-size:1.02rem; line-height:1.7;}
   .closing em{color:#fff; font-style:normal; font-weight:600;}
 
-  body{padding-bottom:60px;}
+  body{padding-bottom:0;}
+
+  /* ---------- Site nav (matches portfolio) ---------- */
+  a{color:inherit; text-decoration:none;}
+  .topnav{
+    display:flex; align-items:center; justify-content:space-between;
+    max-width:1280px; margin:0 auto; padding:3.5rem 8vw 0;
+  }
+  .logo-text{
+    font-family:var(--display); font-size:30px; font-weight:700;
+    color:var(--brand); letter-spacing:0.01em; line-height:1.2;
+  }
+  .topnav nav a{
+    font-family:var(--body); font-size:16px; font-weight:500; color:var(--ink);
+    padding-bottom:2px; border-bottom:1px solid transparent;
+    transition:border-color 0.2s ease, color 0.2s ease;
+  }
+  .topnav nav a:hover{ border-color:var(--brand); color:var(--brand); }
+
+  /* ---------- Footer (matches portfolio) ---------- */
+  .cs-footer{
+    max-width:var(--maxw); margin:0 auto; padding:3rem 28px 5rem;
+    display:flex; justify-content:space-between; align-items:center;
+    flex-wrap:wrap; gap:1.5rem; border-top:1px solid var(--line);
+  }
+  .cs-footer .back-link{ font-size:15px; font-weight:500; color:var(--ink); }
+  .cs-footer .back-link:hover{ color:var(--brand); }
+  .cs-footer .contact-email{ font-size:15px; font-weight:600; color:var(--brand); }
+  @media (max-width:860px){ .topnav{ padding:2rem 6vw 0; } }
 
   .snap-grid{display:grid; grid-template-columns:repeat(auto-fit, minmax(170px,1fr)); gap:20px 28px; margin-top:8px;}
   .snap-item .snap-label{font-family:var(--mono); font-size:0.68rem; text-transform:uppercase; letter-spacing:0.08em; color:var(--gray-soft); margin-bottom:6px;}
@@ -154,6 +182,11 @@
 </head>
 
 <body>
+
+<div class="topnav">
+  <a class="logo-text" href="https://www.amrutajadhav.com/index.html">Amruta J</a>
+  <nav><a href="https://www.amrutajadhav.com/jbl.html">Next project →</a></nav>
+</div>
 
 <div class="wrap" style="padding-top:64px;">
   <span class="eyebrow-pill"><span class="dot"></span>0-to-1 Mobile Product · Product Design</span>
@@ -700,7 +733,10 @@
   </div>
 </section>
 
-
+<footer class="cs-footer">
+  <a class="back-link" href="https://www.amrutajadhav.com/jbl.html">Next project →</a>
+  <a class="contact-email" href="mailto:amruta.inbox@gmail.com">amruta.inbox@gmail.com</a>
+</footer>
 
 </body>
 </html>

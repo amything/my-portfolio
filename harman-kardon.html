@@ -71,6 +71,8 @@
   /* ---------- Top nav ---------- */
   .topnav{
     display:flex; align-items:center; justify-content:space-between;
+    max-width:1280px;
+    margin:0 auto;
     padding: 3.5rem 8vw 0;
   }
   .logo-text{
@@ -122,7 +124,8 @@
   .hero-shot img{ width:100%; height:auto; object-fit:cover; }
 
   footer{
-    margin-top:0; padding: 3.5rem 8vw 3rem;
+    max-width:1280px; margin:0 auto;
+    padding: 3.5rem 8vw 3rem;
     display:flex; justify-content:space-between; align-items:flex-end;
     flex-wrap:wrap; gap:2rem;
     border-top:1px solid var(--line);
@@ -134,6 +137,10 @@
   .foot-note{
     max-width:1280px; margin:0 auto; padding: 0 8vw 3rem;
     font-family:var(--font-body); font-size:var(--p3); color:var(--text-faint);
+  }
+
+  @media (max-width: 860px){
+    .topnav{ padding:2rem 6vw 0; }
   }
 </style>
 </head>

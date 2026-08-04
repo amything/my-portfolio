@@ -4,6 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Harman Kardon — Amruta J</title>
+<link rel="icon" type="image/png" href="Thumbnail_Aj.png">
+<link rel="apple-touch-icon" href="Thumbnail_Aj.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -83,11 +85,12 @@
     letter-spacing:0.01em;
   }
   .back-link{
-    font-family:var(--font-body); font-size:var(--p2); font-weight:500;
-    color:var(--heading);
-    transition:color 0.2s ease;
+    font-family:var(--font-body);
+    font-size:var(--p2); font-weight:500; color:var(--heading);
+    padding-bottom:2px; border-bottom:1px solid transparent;
+    transition:border-color 0.2s ease, color 0.2s ease;
   }
-  .back-link:hover{ color:var(--coral); }
+  .back-link:hover{ border-color:var(--coral); color:var(--coral); }
 
   /* ---------- Case study header ---------- */
   .case-header{
@@ -148,7 +151,7 @@
 
 <div class="topnav">
   <a class="logo-text" href="index.html">Amruta J</a>
-  <a class="back-link" href="index.html">← Back to portfolio</a>
+  <a class="back-link" href="https://www.amrutajadhav.com/sterling-holidays.html">Next project →</a>
 </div>
 
 <header class="case-header">
@@ -172,13 +175,10 @@
 
 </main>
 
-<footer id="contact">
-  <h2>From concept to creation,<br>let's make it happen</h2>
-  <div class="contact-links">
-    <a class="contact-email" href="mailto:amruta.inbox@gmail.com">amruta.inbox@gmail.com</a>
-  </div>
+<footer class="cs-footer">
+  <a class="contact-email" href="mailto:amruta.inbox@gmail.com">amruta.inbox@gmail.com</a>
+  <a class="back-link" href="https://www.amrutajadhav.com/sterling-holidays.html">Next project →</a>
 </footer>
-<div class="foot-note">© 2026 Amruta J — Brisbane, Australia</div>
 
 </body>
 </html>
